@@ -12,8 +12,11 @@ def print_hi(name):
 # Press the green button in the gutter to run the script.
 
 def main():
-    from calculadora import calculadora
-    calculadora()
+    nombre_heroe = input("Introduce el nombre de tu heroe: ")
+    heroe = Heroe(nombre_heroe)
+
+    mazmorra = Mazmorra(heroe)
+    mazmorra.jugar()
 if __name__ == '__main__':
       main()
 
