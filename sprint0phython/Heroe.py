@@ -7,12 +7,13 @@ class Heroe:
         self.nombreHeroe=nombreHeroe
 
     def atacar (self,enemigo):
-        daño = self.ataque - enemigo.get(defensaEnemigo)
-        print("Heroe ataca a " + enemigo.get(nombreEnemigo) + ".")
+        daño = self.ataque - enemigo.defensaEnemigo
+        print("Heroe ataca a " + enemigo.nombreEnemigo + ".")
         if daño > 0:
-            print("El enemigo" +  enemigo.get(nombreEnemigo)) + "ha recibido " + daño + "puntos de daño.")
+            print("El enemigo" +  enemigo.nombreEnemigo + "ha recibido " + daño + "puntos de daño.")
         else:
             print("El enemigo a bloqueado el ataque.")
+
 
     def curarse (self):
         self.salud
