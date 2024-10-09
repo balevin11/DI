@@ -1,10 +1,11 @@
 class Heroe:
+    MAX_HEALTH = int(100)
     #inicializar atributos del heroe
     def __init__(self,namehero):
         self.attack = int(10)
         self.defense = int(5)
         self.health = int(100)
-        self.MAX_HEALTH = int(100)
+
         self.nameHero=namehero
 
     def atacar (self,enemy):
