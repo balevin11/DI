@@ -1,7 +1,7 @@
 def calculadora():
-    from operaciones import suma, resta, multiplicacion, division
-    continuar = "s"
-    while continuar == "s":
+    from operaciones import plus, minus, multiplication, division
+    again = str("s")
+    while again == "s":
         print("Primer número?")
         n1 = float(input())
         print("Segundo número")
@@ -13,23 +13,23 @@ def calculadora():
         print("4.- División")
         op = input()
         if op == "1":
-            print(suma(n1, n2))
+            print(plus(n1, n2))
         elif op == "2":
-            print(resta(n1, n2))
+            print(minus(n1, n2))
         elif op == "3":
-            print(multiplicacion(n1, n2))
+            print(multiplication(n1, n2))
         elif op == "4":
             print(division(n1, n2))
         else:
             print("Error: Valor fuera de rango")
         print("¿Realizar otra operación? (s/n)")
-        continuar = input()
-        while continuar != "s" and continuar != "n":
-            if continuar != "s" and continuar != "n":
+        again = input()
+        while again != "s" and again != "n":
+            if again != "s" and again != "n":
                 print ("Error: Valor fuera de rango")
             print ("¿Realizar otra operación? (s/n)")
-            continuar = input()
-            print (continuar)
+            again = input()
+            print (again)
 
-        if continuar == "n":
+        if again == "n":
             print ("Fin del programa")

@@ -10,13 +10,17 @@ def print_hi(name):
 
 
 # Press the green button in the gutter to run the script.
+import Heroe
+import Monstruo
+import Mazmorra
+
 
 def main():
-    nombre_heroe = input("Introduce el nombre de tu heroe: ")
-    heroe = Heroe(nombre_heroe)
+    name_hero = input("Introduce el nombre de tu heroe: ")
+    hero = Heroe(name_hero)
 
-    mazmorra = Mazmorra(heroe)
-    mazmorra.jugar()
+    dungeon = Mazmorra(hero)
+    dungeon.jugar()
 if __name__ == '__main__':
       main()
 
