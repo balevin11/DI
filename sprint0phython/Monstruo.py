@@ -1,11 +1,12 @@
 class Monstruo:
     # inicializar atributos del monstruo
-    def __init__(self):
-        self.nameMonster = "Montruo"
-        self.attack = int(10)
-        self.defense = int(5)
-        self.health = int(100)
+    attack = int(10)
+    defense = int(5)
+    health = int(100)
+    nameMonster = "Monstruo"
 
+    def __init__(self):
+         pass
     def atacar(self, hero):
         damage = self.attack - hero.defense
         print("El monstruo " + self.nameMonster + "ataca a " + hero.nameHero + ".")
@@ -14,6 +15,8 @@ class Monstruo:
             print("El héroe " + hero.nameHero + " ha recibido " + damage +" puntos de daño.")
         else:
             print("El héroe ha bloqueado el ataque.")
+            #le bajamos la vida al heroe
+        hero.health -= damage
 
     def esta_vivo(self):
         # control de que el monstruo sigue vivo
@@ -21,3 +24,4 @@ class Monstruo:
             return True
         else:
             return False
+
