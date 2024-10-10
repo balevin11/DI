@@ -1,6 +1,7 @@
 #importamos desde operaciones las funciones que vamos a usar
 from operaciones import plus, minus, multiplication, division
 
+
 def calculadora():
     again = str("s")
 #iniciamos el bucle por si piden realizar otra operación
@@ -10,6 +11,7 @@ def calculadora():
         n1 = float(input())
         print("Segundo número")
         n2 = float(input())
+
         #menu
         print("Operaciones:")
         print("1.- Suma")
@@ -28,6 +30,7 @@ def calculadora():
             print(division(n1, n2))
         else:
             print("Error: Valor fuera de rango")
+
         #pregunta por otra operacion
         print("¿Realizar otra operación? (s/n)")
         again = input()
