@@ -5,7 +5,6 @@ class Heroe:
     attack = int(10)
     defense = int(5)
     health = int(100)
-
     def __init__(self,namehero):
         self.nameHero = namehero
 
@@ -14,15 +13,15 @@ class Heroe:
         print("Heroe ataca a " + enemy.nameMonster + ".")
         #control de si se inflingió daño
         if damage > 0:
-            print("El enemigo" +  enemy.nameMonster + "ha recibido " + damage + "puntos de daño.")
+            print("El enemigo " +  enemy.nameMonster + " ha recibido " + str(damage) + " puntos de daño.")
         else:
-            print("El enemigo a bloqueado el ataque.")
+            print("El enemigo ha bloqueado el ataque.")
         # le bajamos la vida al mostruo
         enemy.health -= damage
 
     def curarse (self):
         #control salud no vaya a ser mayor a la salud máxima
-        if self.health > self.MAX_HEALTH - 5:
+        if self.health <= (self.MAX_HEALTH - 5):
             #aumento de la salud en 5 puntos
             self.health += 5
         print("Heroe se ha curado. Salud actual: " + str(self.health) + ".")
