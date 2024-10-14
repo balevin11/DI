@@ -1,13 +1,13 @@
 import tkinter as tk
 
 
-#Creamos la funcion para cambiar el texto
+#Creamos la función para cambiar el texto
 def cambio_texto():
     label3.config(text="Texto 2")
 
 #crear la ventana principal
 root = tk.Tk()
-root.title("DI Sprint1")
+root.title("Ejercicio 1")
 root.geometry("300x200")
 
 #crear los textos
