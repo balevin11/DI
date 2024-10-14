@@ -1,11 +1,11 @@
 import tkinter as tk
 
 #función para cerrar la ventana
-def cerrar_ventana():
+def cerrar():
     root.destroy()
 
 #función para mostrar texto
-def mostrar_mensaje():
+def mensaje():
    label.config(text="Bienvenido")
 
 #crear la ventana principal
@@ -17,12 +17,12 @@ root.geometry("300x200")
 label = tk.Label(root, text="")
 label.pack()
 
-#crear el boton que muestre el texo
-button = tk.Button(root,text="Mostrar texto", command = mostrar_mensaje)
+#crear el boton que muestre el texto
+button = tk.Button(root, text="Mostrar texto", command = mensaje)
 button.pack()
 
 #crear el boton que cierre la ventana
-button = tk.Button(root,text="Cerrar ventana", command = cerrar_ventana)
+button = tk.Button(root, text="Cerrar ventana", command = cerrar)
 button.pack()
 
 #ejecutar el bucle principal
