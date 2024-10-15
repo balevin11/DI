@@ -1,6 +1,5 @@
 import tkinter as tk
 
-
 #Creamos la función para cambiar el texto
 def cambio_texto():
     label3.config(text="Texto 2")
@@ -24,4 +23,3 @@ button.pack()
 
 #ejecutar el bucle principal
 root.mainloop()
-

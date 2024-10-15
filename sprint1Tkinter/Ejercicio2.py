@@ -1,5 +1,6 @@
 import tkinter as tk
 
+
 #función para cerrar la ventana
 def cerrar():
     root.destroy()

@@ -24,21 +24,22 @@ root = tk.Tk()
 root.title('Ejercicio 3')
 root.geometry('300x200')
 
-
 #crear la variable para el RadioButton
 var_radio = tk.StringVar()
 var_radio.set("blanco") #valor iniciar para evitar errores
 
 #crear radioButtons
-radio1 = tk.Radiobutton(root,text="Rojo", variable=var_radio, value ="rojo", command=fondo)
+radio1 = tk.Radiobutton(root,text="Rojo", variable=var_radio,
+                        value ="rojo", command=fondo)
 radio1.pack()
 
-radio2 = tk.Radiobutton(root,text="Verde", variable=var_radio, value ="verde",  command=fondo)
+radio2 = tk.Radiobutton(root,text="Verde", variable=var_radio,
+                        value ="verde",  command=fondo)
 radio2.pack()
 
-radio3 = tk.Radiobutton(root,text="Azul", variable=var_radio, value ="azul",  command=fondo)
+radio3 = tk.Radiobutton(root,text="Azul", variable=var_radio,
+                        value ="azul",  command=fondo)
 radio3.pack()
-
 
 #ejecutar el bucle principal
 root.mainloop()

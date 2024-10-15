@@ -1,7 +1,8 @@
 import tkinter as tk
 
-#funcion que personaliza el saludo (es necesario el get para distinguir
-#entre widget entry y variable)"
+
+#funcion que personaliza el saludo (es necesario el get para
+#distinguir entre widget entry y variable)"
 def saludo():
     namee = name.get()
     label.config(text="Hola " + namee +". ¿Que tal estás?")
