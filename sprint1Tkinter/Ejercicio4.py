@@ -3,21 +3,21 @@ import tkinter as tk
 #crear funcion para la etiqueta
 def aficiones():
     #controlar que checkButtons estan activos y guardarlos en variables
-    if leer_var.get():
-        leer = " leer"
+    if read_var.get():
+        read = " leer"
     else:
-        leer = ""
-    if musica_var.get():
-        musica = " musica"
+        read = ""
+    if music_var.get():
+        music = " música"
     else:
-        musica = ""
-    if deporte_var.get():
-        deporte = " deporte"
+        music = ""
+    if sport_var.get():
+        sport = " deporte"
     else:
-        deporte =""
+        sport = ""
 
     #modificar la etiqueta con los checkbutton elegidos
-    label.config(text="Aficiones:"+leer+musica+deporte)
+    label.config(text="Aficiones:" + read + music + sport)
 
 
 
@@ -29,16 +29,18 @@ root.geometry('300x200')
 
 
 #crear las variables CheckButton
-leer_var = tk.BooleanVar()
-musica_var = tk.BooleanVar()
-deporte_var = tk.BooleanVar()
+read_var = tk.BooleanVar()
+music_var = tk.BooleanVar()
+sport_var = tk.BooleanVar()
 
-#las inicializamos
-check = tk.Checkbutton(root,text="Leer", variable=leer_var, command=aficiones)
+#crear checkButtons
+check = tk.Checkbutton(root,text="Leer", variable=read_var, command=aficiones)
 check.pack()
-check2 = tk.Checkbutton(root,text="Música", variable=musica_var, command=aficiones)
+
+check2 = tk.Checkbutton(root,text="Música", variable=music_var, command=aficiones)
 check2.pack()
-check3 = tk.Checkbutton(root,text="Deporte", variable=deporte_var, command=aficiones)
+
+check3 = tk.Checkbutton(root,text="Deporte", variable=sport_var, command=aficiones)
 check3.pack()
 
 #crear la etiqueta
