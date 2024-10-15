@@ -18,11 +18,11 @@ label = tk.Label(root, text="")
 label.pack()
 
 #crear el boton que muestre el texto
-button = tk.Button(root, text="Mostrar texto", command = mensaje)
+button = tk.Button(root, text="Mostrar texto", command=mensaje)
 button.pack()
 
 #crear el boton que cierre la ventana
-button = tk.Button(root, text="Cerrar ventana", command = cerrar)
+button = tk.Button(root, text="Cerrar ventana", command=cerrar)
 button.pack()
 
 #ejecutar el bucle principal

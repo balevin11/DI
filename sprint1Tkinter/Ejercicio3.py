@@ -20,7 +20,7 @@ name = tk.Entry(root)
 name.pack()
 
 #crear el boton que muestre el saludo
-button = tk.Button(root, text="Mostrar texto", command = saludo)
+button = tk.Button(root, text="Mostrar texto", command=saludo)
 button.pack()
 
 #ejecutar el bucle principal

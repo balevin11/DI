@@ -19,7 +19,7 @@ label3 = tk.Label(root, text="Texto 1")
 label3.pack()
 
 #crear el boton que invoque la funcion cambio_texto
-button = tk.Button(root,text="      ", command = cambio_texto)
+button = tk.Button(root,text="      ", command=cambio_texto)
 button.pack()
 
 #ejecutar el bucle principal
