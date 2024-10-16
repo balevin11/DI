@@ -9,7 +9,7 @@ def mostrar_selecciones():
 
 #crear la ventana principal
 root = tk.Tk()
-root.title('Ejercicio 3')
+root.title('Ejercicio 6')
 root.geometry('300x200')
 
 #creamos nuestra lista de opciones

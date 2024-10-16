@@ -13,7 +13,7 @@ def mensaje_ayuda():
 
 #crear la ventana principal
 root = tk.Tk()
-root.title('Ejercicio 3')
+root.title('Ejercicio 9')
 root.geometry('300x200')
 
 #crear el menu principal

@@ -21,7 +21,7 @@ def fondo():
 
 #crear la ventana principal
 root = tk.Tk()
-root.title('Ejercicio 3')
+root.title('Ejercicio 5')
 root.geometry('300x200')
 
 #crear la variable para el RadioButton

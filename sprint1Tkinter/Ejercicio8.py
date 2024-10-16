@@ -9,7 +9,7 @@ def no_mostrar():
 
 #crear la ventana principal
 root = tk.Tk()
-root.title('Ejercicio 3')
+root.title('Ejercicio 8')
 root.geometry('300x200')
 
 #crear los frames

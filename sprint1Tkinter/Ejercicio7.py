@@ -22,7 +22,7 @@ def crear():
 
 #crear la ventana principal
 root = tk.Tk()
-root.title('Ejercicio 3')
+root.title('Ejercicio 7')
 root.geometry('700x700')
 
 #crear el canvas

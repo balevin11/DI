@@ -8,7 +8,7 @@ def texto_largo():
 
 #crear la ventana principal
 root = tk.Tk()
-root.title('Ejercicio 3')
+root.title('Ejercicio 10')
 root.geometry('600x400')
 
 #crear texto
