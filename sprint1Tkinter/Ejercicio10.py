@@ -13,7 +13,7 @@ root.geometry('600x400')
 
 #crear texto
 text =tk.Text(root, height=20, width=50, wrap="none")
-text.grid(row=0,column=0,sticky='nsew')#grid da mayor control del layout
+text.grid(row=0,column=0, sticky='nsew')#grid da mayor control del layout
 
 #crear scrollbar
 scroll = tk.Scrollbar(root, orient="vertical", command=text.yview)

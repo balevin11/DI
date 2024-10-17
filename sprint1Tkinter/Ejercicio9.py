@@ -23,13 +23,13 @@ root.config(menu=main_menu)
 #crear submenú abrir
 archive_menu = tk.Menu(main_menu, tearoff=0)
 main_menu.add_cascade(label='Archivo', menu=archive_menu)
-(archive_menu.add_command(label='Abrir', command=nueva_ventana))
+archive_menu.add_command(label='Abrir', command=nueva_ventana)
 archive_menu.add_separator()
 archive_menu.add_command(label='Salir', command=salir)
 
 #crear submenú ayuda
 help_menu = tk.Menu(main_menu, tearoff=0)
-main_menu.add_cascade(label='Archivo', menu=help_menu)
+main_menu.add_cascade(label='Ayuda', menu=help_menu)
 help_menu.add_command(label='Acerca de', command=mensaje_ayuda)
 
 #ejecutar el bucle principal
