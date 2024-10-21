@@ -11,7 +11,7 @@ class Application:
 
         #inicializamoc variables
         self.num_jugadores = 0
-        self.win_j1= 0
+        self.win_j1 = 0
         self.win_j2 = 0
 
         #crear menu
@@ -102,12 +102,12 @@ class Application:
 
     def interfaz(self):
         #mostrar toda la interfaz segun el modo
-        if self.num_jugadores==1:
+        if self.num_jugadores == 1:
             self.label_mode.config(text="Modo de juego: Un jugador" )
-        elif self.num_jugadores==2:
+        elif self.num_jugadores == 2:
             self.label_mode.config(text="Modo de juego: Dos jugadores")
 
-        self.label_result.config(text= str(self.win_j1) + "-" +
+        self.label_result.config(text=str(self.win_j1) + "-" +
                                        str(self.win_j2))
         self.label_j1.config(text="Jugador 1")
         self.stone_j1.grid(column=0, row=3)
