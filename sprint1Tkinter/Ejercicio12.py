@@ -32,10 +32,10 @@ root.geometry('700x500')
 
 #pedir nombre
 label1 = tk.Label(root, text='Nombre')
-label1.grid(column=0, row=0, sticky="nsew")
+label1.grid(column=0, row=0)
 
 name = tk.Entry(root)
-name.grid(column=1, row=0, sticky="ns")
+name.place(x=100, y=0)
 
 #pedir edad mediante un scale
 age = tk.Scale(root, from_=0, to=100, orient="horizontal",
