@@ -41,31 +41,41 @@ class ControladorNotas:
     #guardar las notas en notas.txt
     def guardar_notas(self):
         self.model.guardar_notas()
-        messagebox.showinfo("Guardado", "El guardado se realizó correctamente")
+        messagebox.showinfo("Guardado", "El guardado "
+                            "se realizó correctamente")
 
     #rescatar las notas de notas.txt a la listbox
     def cargar_notas(self):
         self.model.cargar_notas()
         self.actualizar_listbox()
 
+    #crear un hilo y llamar descargar imagen
     def descargar_imagen(self):
-        url = 'https://github.com/usuario/repositorio/raw/main/imagen.jpg'
-        hilo = threading.Thread(target=self.descargar_imagen1, args=url)
+        url = ('https://raw.githubusercontent.com/balevin11/DI/'
+               'main/EjercicioAmpliacionTkinter/imagen.jpg')
+        hilo = threading.Thread(target=self.descargar_imagen_hilo,
+                                args=(url,))
         hilo.start()
 
-    def descargar_imagen1(self, url):
+    #descargar y mostrar una imagen
+    def descargar_imagen_hilo(self, url):
         try:
+            #obtener la imagen
             respuesta = requests.get(url)
-            respuesta.raise_for_status()  # Lanza una excepción si la descarga falla
+            respuesta.raise_for_status()
+
+            #cargar la imagen en una variable
             imagen = Image.open(BytesIO(respuesta.content))
             imagen_tk = ImageTk.PhotoImage(imagen)
 
             # Actualizar la interfaz en el hilo principal
             self.vista.label_image.config(image=imagen_tk)
-            self.vista.label_image.image = imagen_tk  # Mantener una referencia
+            self.vista.label_image.image = imagen_tk
         except requests.exceptions.RequestException as e:
             print(f"Error al descargar la imagen: {e}")
-            self.vista.label_image.config(text="Error al descargar la imagen.")
+            self.vista.label_image.config(text="Error al descargar "
+                                               "la imagen.")
+
     #mostrar coordenadas del último clic
     def actualizar_coordenadas(self,event):
         coords = [event.x, event.y]

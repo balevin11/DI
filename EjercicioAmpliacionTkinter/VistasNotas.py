@@ -8,10 +8,11 @@ class VistasNotas:
         #crear ventana principal
         self.root = tk.Tk()
         self.root.title('VistasNotas')
-        self.root.geometry('500x500')
+        self.root.geometry('500x600')
 
         #crear etiquetas
-        self.label_title = tk.Label(self.root, text="Notas mode", font=("arial", 20, "bold"))
+        self.label_title = tk.Label(self.root, text="Notas mode",
+                                    font=("arial", 20, "bold"))
         self.label_title.pack()
 
         self.label_coords = tk.Label(self.root, text="")
