@@ -30,6 +30,7 @@ root = tk.Tk()
 root.title('Ejercicio 12')
 root.geometry('700x500')
 
+
 #pedir nombre
 label1 = tk.Label(root, text='Nombre')
 label1.grid(column=0, row=0)
