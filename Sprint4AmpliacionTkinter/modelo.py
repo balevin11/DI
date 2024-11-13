@@ -15,12 +15,15 @@ class GameModel:
         if difficulty == "facil":
             self.board= [int(50) for _ in range(16)]
             self.board_size = 16
+            self.board_large = 4
         elif difficulty == "normal":
             self.board = [int(50)  for _ in range(36)]
             self.board_size = 36
+            self.board_large = 6
         elif difficulty == "dificil":
             self.board = [int(50)  for _ in range(64)]
             self.board_size = 64
+            self.board_large = 8
         else:
             print("error")
 
