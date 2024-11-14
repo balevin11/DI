@@ -49,11 +49,11 @@ class GameView:
 
     def update_move_count(self, moves):
         self.moves.config(text="Movimientos: " + moves)
-        self.update_move_count_callback()
+
 
     def update_time(self, time):
         self.timer.config(text="Tiempo: " + time)
-        self.update_time_callback()
+
 
     def destroy(self):
         self.timer.config(text="")

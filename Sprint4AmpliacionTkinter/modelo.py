@@ -98,10 +98,12 @@ class GameModel:
     def get_time(self):
         return time.time() - self.start_time
 
-    #comprobar la pareja selccionada
+    #comprobar la pareja seleccionada
     def check_match(self, pos1, pos2):
         if self.board[pos1] == self.board[pos2]:
             self.pairs_found += 1
+            return True
+        return False
 
     #comprobar si terminó el juego
     def is_game_complete(self):
