@@ -1,4 +1,4 @@
-from tkinter import Toplevel, Label, messagebox, simpledialog, Tk
+from tkinter import Toplevel, Label, messagebox, simpledialog
 from modelo import GameModel
 from vista import MainMenu, GameView
 import time
@@ -9,8 +9,8 @@ class GameController:
         self.model = None
         self.selected = []
         self.timer_started = False
-        self.main_menu = MainMenu(self.root, self.start_game, show_stats_callback, quit_callback)
-        self.game_view = GameView(self.on_card_click, self.update_move_count, update_time_callback)
+        self.main_menu = MainMenu(root, self.start_game, self.show_stats, root.destroy)
+        self.game_view = GameView(self.on_card_click, self.update_move_count, self.update_time)
         self.loading = None
         self.player_name = None
         self.moves = 0
@@ -31,8 +31,8 @@ class GameController:
 
     def show_loading_window(self, message):
         self.loading = Toplevel()
-        self.loading.title = "Cargando"
-        self.loading.geometry = "300x200"
+        self.loading.title("Cargando")
+        self.loading.geometry("300x200")
         self.loading.grab_set()
         label = Label(self.loading, text=message)
         label.pack()
@@ -55,14 +55,34 @@ class GameController:
             self.handle_card_selection()
 
     def handle_card_selection(self):
-
         if self.model.check_match(self.selected[0], self.selected[1]):
             time.sleep(1)
             self.game_view.reset_cards(self.selected[0], self.selected[1])
         self.moves += 1
-        self.update_move_count(self.moves)
+        self.update_move_count()
         self.check_game_complete()
 
-    def update_move_count(self,moves):
-        self.game_view.update_move_count(moves)
+    def update_move_count(self):
+        self.game_view.update_move_count(self.moves)
+
+    def check_game_complete(self):
+        if self.model.is_game_complete():
+            messagebox.showinfo("Victoria", "Enorabuena has ganado")
+            self.return_to_main_menu()
+
+    def return_to_main_menu(self):
+        self.game_view.destroy()
+
+    def show_stats(self):
+        self.main_menu.show_stats(self.model.load_scores())
+
+    def update_time(self):
+        self.game_view.update_time(self.time)
+
+
+
+
+
+
+
 

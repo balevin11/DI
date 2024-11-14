@@ -16,7 +16,7 @@ class GameView:
 
     def create_board(self, model):
         self.game = Toplevel()
-        self.game.title = "Game"
+        self.game.title("Game")
         self.game.geometry(model.cell_size * (int(model.board_large) + 2))
 
         #guardar las imágenes en vista
@@ -66,7 +66,8 @@ class MainMenu:
     def __init__(self, root, start_game_callback, show_stats_callback, quit_callback):
         #crear ventana principal
         self.root = root
-        self.root.title = "GameView"
+        self.root.title("GameView")
+
 
 
         #crear botones
@@ -85,7 +86,7 @@ class MainMenu:
 
     def show_stats(self, stats):
         stats_root = Toplevel()
-        stats_root.title = "Stats"
+        stats_root.title("Stats")
         stats_root.geometry("500x600")
         i = 0
         for row in stats:

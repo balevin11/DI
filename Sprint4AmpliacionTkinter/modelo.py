@@ -72,13 +72,12 @@ class GameModel:
             url_base=""
 
             #descargar la hidden image
-            self.hidden_image = download_image(url_base + "hidden.jpg",
-                                               self.cell_size)
+            self.hidden_image = download_image((url_base + "hidden.jpg"), self.cell_size)
 
             #descargar y guardar cada imagen
             for image_id in self.unique_image_ids:
-                self.images[image_id] = download_image(url_base +
-                                        str(image_id) + ".jpg" ,self.cell_size)
+                self.images[image_id] = download_image((url_base +
+                                        str(image_id) + ".jpg") ,self.cell_size)
 
             #confirmar que se descargaron las imagenes
             self.images_loaded = True
