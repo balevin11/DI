@@ -12,7 +12,7 @@ class GameModel:
 
     def __init__(self, difficulty, player_name, cell_size=100):
         #crear el tablero según la dificultad
-        if difficulty == "facil":
+        if difficulty == "fácil":
             self.board= [int(50) for _ in range(16)]
             self.board_size = 16
             self.board_large = 4
@@ -20,7 +20,7 @@ class GameModel:
             self.board = [int(50)  for _ in range(36)]
             self.board_size = 36
             self.board_large = 6
-        elif difficulty == "dificil":
+        elif difficulty == "difícil":
             self.board = [int(50)  for _ in range(64)]
             self.board_size = 64
             self.board_large = 8
@@ -117,11 +117,11 @@ class GameModel:
         aux_ranking = None
         if self.ranking is None:
             self.ranking = [["Nombre", "Dificultad", "nº movimientos", "Fecha"],
-                            ["-","facil","-","-"], ["-","facil","-","-"],
-                            ["-","facil","-","-"], ["-","normal","-","-"],
+                            ["-","fácil","-","-"], ["-","fácil","-","-"],
+                            ["-","fácil","-","-"], ["-","normal","-","-"],
                             ["-","normal","-","-"], ["-","normal","-","-"],
-                            ["-","dificil","-","-"], ["-","dificil","-","-"],
-                            ["-","dificil","-","-"]]
+                            ["-","difícil","-","-"], ["-","difícil","-","-"],
+                            ["-","difícil","-","-"]]
 
         #leer el ranking filtrar por dificultad y comparar
         #cantidad de movimientos
@@ -156,11 +156,11 @@ class GameModel:
     #cargar ranking
     def load_scores(self):
         self.ranking = [["Nombre", "Dificultad", "nº movimientos", "Fecha"],
-                        ["-", "facil", "-", "-"], ["-", "facil", "-", "-"],
-                        ["-", "facil", "-", "-"], ["-", "normal", "-", "-"],
+                        ["-", "fácil", "-", "-"], ["-", "fácil", "-", "-"],
+                        ["-", "fácil", "-", "-"], ["-", "normal", "-", "-"],
                         ["-", "normal", "-", "-"], ["-", "normal", "-", "-"],
-                        ["-", "dificil", "-", "-"], ["-", "dificil", "-", "-"],
-                        ["-", "dificil", "-", "-"]]
+                        ["-", "difícil", "-", "-"], ["-", "difícil", "-", "-"],
+                        ["-", "difícil", "-", "-"]]
         #comprobar que existe el archivo
         if os.path.exists("ranking.txt"):
             with open("ranking.txt", "r") as file:
@@ -174,13 +174,13 @@ class GameModel:
                         if i == 0:
                             self.ranking[i] = row
                             out = True
-                        elif i > 0  < 4 and row.__contains__("facil"):
+                        elif i > 0  < 4 and row.__contains__("fácil"):
                             self.ranking[i] = row
                             out = True
                         elif i > 3 < 7 and row.__contains__("normal"):
                             self.ranking[i] = row
                             out = True
-                        elif i > 6 < 10 and row.__contains__("dificil"):
+                        elif i > 6 < 10 and row.__contains__("difícil"):
                             self.ranking[i] = row
                             out = True
                         elif i > 9:
