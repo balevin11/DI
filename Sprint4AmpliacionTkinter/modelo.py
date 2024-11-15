@@ -69,7 +69,7 @@ class GameModel:
         #abrir una subfunción para el hilo
         def load_images_thread():
             #inicializar variables necesarias
-            url_base=""
+            url_base="https://github.com/balevin11/DI/blob/main/Sprint4AmpliacionTkinter/img/"
 
             #descargar la hidden image
             self.hidden_image = download_image((url_base + "hidden.jpg"), self.cell_size)
