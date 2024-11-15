@@ -5,12 +5,14 @@ import time
 import datetime
 from xmlrpc.client import MAXINT
 
+from PIL import ImageTk
+
 from recursos import download_image
 
 
 class GameModel:
 
-    def __init__(self, difficulty, player_name, cell_size=100):
+    def __init__(self, difficulty, player_name, cell_size=60):
         #crear el tablero según la dificultad
         if difficulty == "fácil":
             self.board= [int(50) for _ in range(16)]
@@ -27,31 +29,32 @@ class GameModel:
         else:
             print("error")
 
-        #llamar a las funciones privadas
-        self._generate_board()
-        self._load_images()
-
         #inicializar variables necesarias
+        self.cell_size = int(cell_size)
         self.start_time = None
         self.moves = None
         if player_name != "":
             self.player_name = player_name
         else:
             print("error")
-        self.cell_size = cell_size
         self.difficulty = difficulty
         self.images = {}
         self.images_loaded = False
         self.pairs_found = 0
         self.ranking = None
+        self.hidden_image = None
+
+        #llamar a las funciones privadas
+        self._generate_board()
+        self._load_images()
 
     def _generate_board(self):
         cont = 0
         self.unique_image_ids =[]
         #cubrir el tablero con parejas de id
-        while cont < self.board_size/2:
+        while cont < self.board_size//2:
             #obtener un id aleatorio
-            image_id = random.randint(0,31)
+            image_id = random.randint(1,32)
             #comprobar que el id no se repita
             if image_id not in self.unique_image_ids:
                 self.unique_image_ids.append(image_id)
@@ -69,21 +72,28 @@ class GameModel:
         #abrir una subfunción para el hilo
         def load_images_thread():
             #inicializar variables necesarias
-            url_base="https://github.com/balevin11/DI/blob/main/Sprint4AmpliacionTkinter/img/"
+            url_base = "https://raw.githubusercontent.com/balevin11/DI/main/Sprint4AmpliacionTkinter/img/"
 
             #descargar la hidden image
-            self.hidden_image = download_image((url_base + "hidden.jpg"), self.cell_size)
+            self.hidden_image = download_image((url_base + "hidden_image.jpg"), self.cell_size)
 
             #descargar y guardar cada imagen
             for image_id in self.unique_image_ids:
                 self.images[image_id] = download_image((url_base +
                                         str(image_id) + ".jpg") ,self.cell_size)
+                print("image " + str(image_id))
 
             #confirmar que se descargaron las imagenes
             self.images_loaded = True
+            print("hecho")
 
         #abrir el hilo llamando a la función anterior
         threading.Thread(target=load_images_thread,daemon=True).start()
+
+    def adapt_images(self):
+        for image_id in self.unique_image_ids:
+            self.images[image_id] = ImageTk.PhotoImage(self.images[image_id])
+        self.hidden_image = ImageTk.PhotoImage(self.hidden_image)
 
     #comprobar imagenes descargadas
     def images_are_loaded(self):

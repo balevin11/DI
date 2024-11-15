@@ -6,7 +6,6 @@ from modelo import GameModel
 if __name__ == '__main__':
     root = tk.Tk()
     root.geometry ("200x100")
-    model = GameModel("normal", "jugador")
     controller = GameController(root)
     root.mainloop()
 #preguntas que hacer:

@@ -15,9 +15,10 @@ class GameView:
         self.game = None
 
     def create_board(self, model):
+        size = (model.cell_size+20) * int(model.board_large)
         self.game = Toplevel()
         self.game.title("Game")
-        self.game.geometry(model.cell_size * (int(model.board_large) + 2))
+        self.game.geometry(str(size) + "x" + str(size))
 
         #guardar las imágenes en vista
         self.images = model.images

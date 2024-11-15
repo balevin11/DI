@@ -1,7 +1,8 @@
 from io import BytesIO
 
 import requests
-from PIL import Image, ImageTk
+from PIL import Image
+from PIL.Image import Resampling
 
 
 def download_image(url, size):
@@ -11,8 +12,9 @@ def download_image(url, size):
         response.raise_for_status()
 
         image = Image.open(BytesIO(response.content))
-        image.resize((size,size),int("LANCZOS"))
-        ImageTk.PhotoImage(image)
+        image = image.resize((size,size),Resampling.LANCZOS)
+
+
         return image
 
     except requests.exceptions.RequestException as e:

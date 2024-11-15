@@ -1,4 +1,6 @@
 from tkinter import Toplevel, Label, messagebox, simpledialog
+
+
 from modelo import GameModel
 from vista import MainMenu, GameView
 import time
@@ -9,36 +11,43 @@ class GameController:
         self.model = None
         self.selected = []
         self.timer_started = False
-        self.main_menu = MainMenu(root, self.start_game, self.show_stats, root.destroy)
-        self.game_view = GameView(self.on_card_click, self.update_move_count, self.update_time)
         self.loading = None
-        self.player_name = None
+        self.difficulty ="normal"
+        self.player_name = "jugador"
         self.moves = 0
         self.time = None
+        self.main_menu = MainMenu(root, self.start_game, self.show_stats, root.destroy)
+        self.game_view = GameView(self.on_card_click, self.update_move_count, self.update_time)
+
 
     def show_difficulty_selection(self):
-        difficulty = None
-        while difficulty != "fácil" and difficulty != "normal" and difficulty != "difícil":
-            difficulty = simpledialog.askstring("Dificultad", "Elige modo de dificultad(fácil, normal, difícil)")
+        self.difficulty = simpledialog.askstring("Dificultad", "Elige modo de dificultad(fácil, normal, difícil)")
+        while self.difficulty != "fácil" and self.difficulty != "normal" and self.difficulty != "difícil":
+            self.difficulty = simpledialog.askstring("Dificultad", "Elige modo de dificultad(fácil, normal, difícil)")
 
         self.player_name = self.main_menu.ask_player_name()
-        self.start_game(difficulty)
 
-    def start_game(self,difficulty):
+
+    def start_game(self):
+        self.show_difficulty_selection()
         self.show_loading_window(self.player_name + " por favor espere")
-        self.model = GameModel(difficulty,self.player_name)
+        self.model = GameModel(self.difficulty,self.player_name)
         self.check_images_loaded()
+        self.model.adapt_images()
+        self.game_view.create_board(self.model)
+
 
     def show_loading_window(self, message):
         self.loading = Toplevel()
         self.loading.title("Cargando")
-        self.loading.geometry("300x200")
+        self.loading.geometry("200x100")
         self.loading.grab_set()
         label = Label(self.loading, text=message)
         label.pack()
 
+
     def check_images_loaded(self):
-        while self.model.images_are_loaded:
+        while not self.model.images_are_loaded():
             time.sleep(1)
         self.loading.destroy()
 
