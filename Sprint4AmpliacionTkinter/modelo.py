@@ -1,9 +1,9 @@
-import os
+
 import threading
 import random
 import time
 import datetime
-from xmlrpc.client import MAXINT
+
 
 from PIL import ImageTk
 
@@ -38,7 +38,7 @@ class GameModel:
         self.images = {}
         self.images_loaded = False
         self.pairs_found = 0
-        self.ranking = None
+        self.ranking = {"easy": [], "medium": [], "hard": []}
         self.hidden_image = None
 
         #llamar a las funciones privadas
@@ -118,80 +118,9 @@ class GameModel:
 
     #guardar el resultado
     def save_score(self):
-        #inicializamos las variables
-        aux = MAXINT
-        registered = False
-        aux_ranking = None
-        if self.ranking is None:
-            self.ranking = [["Nombre", "Dificultad", "nº movimientos", "Fecha"],
-                            ["-","fácil","-","-"], ["-","fácil","-","-"],
-                            ["-","fácil","-","-"], ["-","normal","-","-"],
-                            ["-","normal","-","-"], ["-","normal","-","-"],
-                            ["-","difícil","-","-"], ["-","difícil","-","-"],
-                            ["-","difícil","-","-"]]
-
-        #leer el ranking filtrar por dificultad y comparar
-        #cantidad de movimientos
-        for i in range(1,9):
-            if (self.difficulty == self.ranking[i][1] and
-                    self.ranking[i][2] > self.moves):
-                #grabar el nuevo resultado solo la primera
-                #vez y guardar ranking anterior
-                if not registered:
-                    if self.ranking[i][2] == "-":
-                        aux = MAXINT
-                    else:
-                        aux = self.ranking[i][2]
-                    aux_ranking = self.ranking[i]
-                    self.ranking[i] = [self.player_name, self.difficulty,
-                                       self.moves, datetime.datetime.now()]
-                    registered = True
-                #desplazar el ranking borrado por su inferior
-                #(excepto si ya era el peor o igual)
-                elif registered and self.ranking[i][2] > aux:
-                    aux_ranking1 = aux_ranking
-                    aux = self.ranking[i][2]
-                    aux_ranking = self.ranking[i]
-                    self.ranking[i] = aux_ranking1
-
-        #grabar el ranking en ek archivo
-        with open("ranking.txt","w") as file:
-            for row in self.ranking:
-                if row[1] != "-":
-                    file.write(row)
+        self.ranking[self.difficulty].append({"nombre": self.player_name, "movimientos": self.moves, "fecha": datetime.datetime.now()})
+        self.ranking[self.difficulty].sort(key=lambda x: x["movimientos"])#x representa el contenido del diccionario
 
     #cargar ranking
     def load_scores(self):
-        self.ranking = [["Nombre", "Dificultad", "nº movimientos", "Fecha"],
-                        ["-", "fácil", "-", "-"], ["-", "fácil", "-", "-"],
-                        ["-", "fácil", "-", "-"], ["-", "normal", "-", "-"],
-                        ["-", "normal", "-", "-"], ["-", "normal", "-", "-"],
-                        ["-", "difícil", "-", "-"], ["-", "difícil", "-", "-"],
-                        ["-", "difícil", "-", "-"]]
-        #comprobar que existe el archivo
-        if os.path.exists("ranking.txt"):
-            with open("ranking.txt", "r") as file:
-                text = file.read()
-                i = 0
-                #leer cada línea y comprobar su dificultad para
-                #grabarlos en orden
-                for row in text:
-                    out = False
-                    while not out:
-                        if i == 0:
-                            self.ranking[i] = row
-                            out = True
-                        elif i > 0  < 4 and row.__contains__("fácil"):
-                            self.ranking[i] = row
-                            out = True
-                        elif i > 3 < 7 and row.__contains__("normal"):
-                            self.ranking[i] = row
-                            out = True
-                        elif i > 6 < 10 and row.__contains__("difícil"):
-                            self.ranking[i] = row
-                            out = True
-                        elif i > 9:
-                            out = True
-                            i = 0
-                        i += 1
-        return self.ranking
+
