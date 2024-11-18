@@ -45,30 +45,30 @@ class GameController:
         self.model.adapt_images()
         self.game_view.create_board(self.model)
 
-    def on_card_click(self, pos):
+    def on_card_click(self,i):
         if not self.timer_started:
             self.timer_started = True
             self.model.start_timer()
             self.update_time()
-
-        # Calcular columna (col) y fila (row) donde ocurrió el clic
-        col = pos.x // self.model.cell_size + 10  # tamaño de la carta más margen
-        row = pos.y // self.model.cell_size + 10
-
         if self.selected [0] is None:
-            self.selected[0] = (col * self.model.board_large) + row #esto calcula la posicion de la carta pasando el tablero de un 2d a 1d
+            self.selected[0] = i
+            self.game_view.update_board(self.selected[0], self.model.board[self.selected[0]])
         else:
-            self.selected[1] = (col * self.model.board_large) + row
-            self.handle_card_selection()
-            self.selected = [None,None]
+            self.selected[1] = i
+            self.game_view.update_board(self.selected[1],self.model.board[self.selected[1]])
+            threading.Thread(target=self.handle_card_selection,daemon=True).start()
+
 
     def handle_card_selection(self):
+        self.game_view.disable_events()
         if self.model.check_match(self.selected[0], self.selected[1]):
             time.sleep(1)
             self.game_view.reset_cards(self.selected[0], self.selected[1])
         self.moves += 1
         self.update_move_count()
         self.check_game_complete()
+        self.selected = [None,None]
+        self.game_view.enable_events()
 
     def update_move_count(self):
         self.game_view.update_move_count(self.moves)

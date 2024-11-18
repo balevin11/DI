@@ -10,7 +10,6 @@ class GameView:
         self.board_frame = tk.Frame()
         self.text_frame = tk.Frame()
         self.on_card_click_callback = on_card_click_callback
-
         self.update_time_callback = update_time_callback
         self.images = None
         self.hidden_image = None
@@ -40,15 +39,22 @@ class GameView:
                 card = tk.Label(self.board_frame, text="", image=self.hidden_image)
                 card.grid(column=i, row=j, padx=10, pady=10)
                 #agregamos el bind a cada carta
-                card.bind("<Button-1>",self.on_card_click_callback)
                 self.cards.append(card)
-
+        self.enable_events()
         #label temporizador y movimientos
         self.timer = tk.Label(self.text_frame, text="")
         self.timer.grid(column=0, row=1, pady=10)
 
         self.moves = tk.Label(self.text_frame, text="")
         self.moves.grid(column=1, row=1, pady=10)
+
+    def disable_events(self):
+        for card in self.cards:
+            card.unbind("<Button-1>")
+
+    def enable_events(self):
+        for pos_card, card in enumerate(self.cards):
+            card.bind("<Button-1>", lambda _, idx=pos_card: self.on_card_click_callback( idx))
 
     def update_board(self, pos, image_id):
         self.cards[pos].config(image=self.images[image_id])
@@ -79,8 +85,6 @@ class MainMenu:
         self.root = root
         self.root.title("GameView")
 
-
-
         #crear botones
         play_button = tk.Button(root, text="Jugar", command=start_game_callback)
         play_button.pack()
@@ -92,8 +96,11 @@ class MainMenu:
         quit_button.pack()
 
     def ask_player_name(self):
-        return simpledialog.askstring("Nombre", "¿Cual es tu nombre?")
-
+        name = ""
+        while name == "":
+            name = simpledialog.askstring("Nombre", "¿Cual es tu nombre?")
+            if name != "":
+                return name
 
     def show_stats(self, stats):
         stats_root = Toplevel()
@@ -104,4 +111,3 @@ class MainMenu:
             label = tk.Label(stats, text=row)
             label.grid(column=i, pady=10)
             i += 1
-

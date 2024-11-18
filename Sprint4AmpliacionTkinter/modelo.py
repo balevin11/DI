@@ -13,32 +13,27 @@ from recursos import download_image
 class GameModel:
 
     def __init__(self, difficulty, player_name, cell_size=50):
-        #inicializar variables necesarias
-        self.start_time = None
-        self.moves = None
-        if player_name != "":
-            self.player_name = player_name
-        else:
-            print("error")
-
         # crear el tablero según la dificultad
         if difficulty == "fácil":
             self.board = [int(50) for _ in range(16)]
             self.board_size = 16
             self.board_large = 4
-            self.cell_size = 100
         elif difficulty == "normal":
             self.board = [int(50) for _ in range(36)]
             self.board_size = 36
             self.board_large = 6
-            self.cell_size = 75
         elif difficulty == "difícil":
             self.board = [int(50) for _ in range(64)]
             self.board_size = 64
             self.board_large = 8
-            self.cell_size = cell_size
         else:
             print("error")
+
+        #inicializar variables necesarias
+        self.start_time = None
+        self.moves = None
+        self.player_name = player_name
+        self.cell_size = cell_size
         self.difficulty = difficulty
         self.images = {}
         self.images_loaded = False
@@ -84,10 +79,8 @@ class GameModel:
                 self.images[image_id] = download_image((url_base +
                                         str(image_id) + ".jpg") ,self.cell_size)
 
-
             #confirmar que se descargaron las imagenes
             self.images_loaded = True
-
 
         #abrir el hilo llamando a la función anterior
         threading.Thread(target=load_images_thread,daemon=True).start()
@@ -111,10 +104,11 @@ class GameModel:
 
     #comprobar la pareja seleccionada
     def check_match(self, pos1, pos2):
+
         if self.board[pos1] == self.board[pos2]:
             self.pairs_found += 1
-            return True
-        return False
+            return False
+        return True
 
     #comprobar si terminó el juego
     def is_game_complete(self):
