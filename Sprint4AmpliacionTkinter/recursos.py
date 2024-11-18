@@ -14,7 +14,6 @@ def download_image(url, size):
         image = Image.open(BytesIO(response.content))
         image = image.resize((size,size),Resampling.LANCZOS)
 
-
         return image
 
     except requests.exceptions.RequestException as e:

@@ -2,23 +2,32 @@ from tkinter import simpledialog, Toplevel
 import tkinter as tk
 
 class GameView:
-    def __init__(self, on_card_click_callback, update_move_count_callback, update_time_callback):
+    def __init__(self, on_card_click_callback, update_time_callback):
         #inicializar labels y variables necesarias
         self.cards =[]
         self.timer = tk.Label()
         self.moves = tk.Label()
+        self.board_frame = tk.Frame()
+        self.text_frame = tk.Frame()
         self.on_card_click_callback = on_card_click_callback
-        self.update_move_count_callback = update_move_count_callback
+
         self.update_time_callback = update_time_callback
         self.images = None
         self.hidden_image = None
         self.game = None
 
     def create_board(self, model):
-        size = (model.cell_size+20) * int(model.board_large)
+        size = (model.cell_size + 30) * int(model.board_large)
         self.game = Toplevel()
         self.game.title("Game")
-        self.game.geometry(str(size) + "x" + str(size))
+        self.game.geometry(str(size) + "x" + str(size + 50))
+
+        # Crear un Frame para el tablero y otro para el texto
+        self.board_frame = tk.Frame(self.game)
+        self.board_frame.grid(row=0, column=0, padx=10, pady=10)
+
+        self.text_frame = tk.Frame(self.game)
+        self.text_frame.grid(row=1, column=0, padx=10, pady=10)
 
         #guardar las imágenes en vista
         self.images = model.images
@@ -28,18 +37,18 @@ class GameView:
         self.cards = []
         for i in range(int(model.board_large)):
             for j in range(int(model.board_large)):
-                card = tk.Label(self.game, text="", image=self.hidden_image)
+                card = tk.Label(self.board_frame, text="", image=self.hidden_image)
                 card.grid(column=i, row=j, padx=10, pady=10)
                 #agregamos el bind a cada carta
                 card.bind("<Button-1>",self.on_card_click_callback)
                 self.cards.append(card)
 
         #label temporizador y movimientos
-        self.timer = tk.Label(self.game, text="")
-        self.timer.grid(column=0, row=9, padx=10, pady=10)
+        self.timer = tk.Label(self.text_frame, text="")
+        self.timer.grid(column=0, row=1, pady=10)
 
-        self.moves = tk.Label(self.game, text="")
-        self.moves.grid(column=0, row=9, padx=10, pady=10)
+        self.moves = tk.Label(self.text_frame, text="")
+        self.moves.grid(column=1, row=1, pady=10)
 
     def update_board(self, pos, image_id):
         self.cards[pos].config(image=self.images[image_id])
@@ -49,12 +58,13 @@ class GameView:
         self.cards[pos2].config(image=self.hidden_image)
 
     def update_move_count(self, moves):
-        self.moves.config(text="Movimientos: " + moves)
-
+        self.moves.config(text="Movimientos: " + str(moves))
 
     def update_time(self, time):
-        self.timer.config(text="Tiempo: " + time)
-
+        m = int(time) //60
+        s = int(time) % 60
+        self.timer.config(text="Tiempo: " + str(m) + ":" + str(s))
+        self.game.after(100, self.update_time_callback)
 
     def destroy(self):
         self.timer.config(text="")
