@@ -1,0 +1,9 @@
+facil,kevin,15,2024-11-19 13:35:32
+facil,balevin,15,2024-11-19 14:19:35
+facil,juan,19,2024-11-19 14:21:40
+normal,kevin,15,2024-11-19 13:35:32
+normal,balevin,15,2024-11-19 14:19:35
+normal,juan,19,2024-11-19 14:21:40
+dificil,kevin,15,2024-11-19 13:35:32
+dificil,balevin,15,2024-11-19 14:19:35
+dificil,juan,19,2024-11-19 14:21:40

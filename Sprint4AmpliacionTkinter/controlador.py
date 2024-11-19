@@ -6,8 +6,7 @@ import time
 
 class GameController:
     def __init__(self, root):
-        self.root = root
-        self.model = None
+        #inicializar variables
         self.selected = [None,None]
         self.timer_started = False
         self.loading = None
@@ -15,20 +14,25 @@ class GameController:
         self.player_name = "jugador"
         self.moves = 0
         self.time = None
+
+        #inicializar clases
+        self.model = GameModel(self.difficulty,self.player_name)
         self.main_menu = MainMenu(root, self.start_game, self.show_stats, root.destroy)
         self.game_view = GameView(self.on_card_click, self.update_time)
 
     def show_difficulty_selection(self):
-        self.difficulty = simpledialog.askstring("Dificultad", "Elige modo de dificultad(fácil, normal, difícil)")
-        while self.difficulty != "fácil" and self.difficulty != "normal" and self.difficulty != "difícil":
-            self.difficulty = simpledialog.askstring("Dificultad", "Elige modo de dificultad(fácil, normal, difícil)")
-        self.player_name = self.main_menu.ask_player_name()
+        self.difficulty = simpledialog.askstring("Dificultad", "Elige modo de dificultad(facil, normal, dificil)")
+        while self.difficulty != "facil" and self.difficulty != "normal" and self.difficulty != "dificil" and self.difficulty is not None:
+            self.difficulty = simpledialog.askstring("Dificultad", "Elige modo de dificultad(facil, normal, dificil)")
+        if self.difficulty is not None:
+            self.player_name = self.main_menu.ask_player_name()
 
     def start_game(self):
         self.show_difficulty_selection()
-        self.show_loading_window(self.player_name + " por favor espere")
-        self.model = GameModel(self.difficulty,self.player_name)
-        threading.Timer(10.0, self.check_images_loaded).start()
+        if self.difficulty is not None and self.player_name is not None:
+            self.show_loading_window(self.player_name + " por favor espere")
+            self.model = GameModel(self.difficulty,self.player_name)
+            threading.Timer(10.0, self.check_images_loaded).start()
 
     def show_loading_window(self, message):
         self.loading = Toplevel()
@@ -49,10 +53,13 @@ class GameController:
         if not self.timer_started:
             self.timer_started = True
             self.model.start_timer()
+            self.game_view.timer_continue = True
             self.update_time()
         if self.selected [0] is None:
             self.selected[0] = i
             self.game_view.update_board(self.selected[0], self.model.board[self.selected[0]])
+        elif i == self.selected[0]:
+            pass
         else:
             self.selected[1] = i
             self.game_view.update_board(self.selected[1],self.model.board[self.selected[1]])
@@ -68,16 +75,21 @@ class GameController:
         self.update_move_count()
         self.check_game_complete()
         self.selected = [None,None]
-        self.game_view.enable_events()
+
 
     def update_move_count(self):
         self.game_view.update_move_count(self.moves)
 
     def check_game_complete(self):
         if self.model.is_game_complete():
-            messagebox.showinfo("Victoria", "Enorabuena has ganado")
+            self.game_view.stop_timer()
+            messagebox.showinfo("Victoria", "Enhorabuena has ganado")
             self.timer_started = False
+            self.model.save_score(self.moves)
+            self.moves = 0
             self.return_to_main_menu()
+        else:
+            self.game_view.enable_events()
 
     def return_to_main_menu(self):
         self.game_view.destroy()
@@ -87,3 +99,4 @@ class GameController:
 
     def update_time(self):
         self.game_view.update_time(self.model.get_time())
+

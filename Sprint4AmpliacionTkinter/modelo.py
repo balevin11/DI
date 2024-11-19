@@ -1,4 +1,3 @@
-
 import threading
 import random
 import time
@@ -14,7 +13,7 @@ class GameModel:
 
     def __init__(self, difficulty, player_name, cell_size=50):
         # crear el tablero según la dificultad
-        if difficulty == "fácil":
+        if difficulty == "facil":
             self.board = [int(50) for _ in range(16)]
             self.board_size = 16
             self.board_large = 4
@@ -22,7 +21,7 @@ class GameModel:
             self.board = [int(50) for _ in range(36)]
             self.board_size = 36
             self.board_large = 6
-        elif difficulty == "difícil":
+        elif difficulty == "dificil":
             self.board = [int(50) for _ in range(64)]
             self.board_size = 64
             self.board_large = 8
@@ -31,14 +30,12 @@ class GameModel:
 
         #inicializar variables necesarias
         self.start_time = None
-        self.moves = None
         self.player_name = player_name
         self.cell_size = cell_size
         self.difficulty = difficulty
         self.images = {}
         self.images_loaded = False
         self.pairs_found = 0
-        self.ranking = {"easy": [], "medium": [], "hard": []}
         self.hidden_image = None
 
         #llamar a las funciones privadas
@@ -104,7 +101,6 @@ class GameModel:
 
     #comprobar la pareja seleccionada
     def check_match(self, pos1, pos2):
-
         if self.board[pos1] == self.board[pos2]:
             self.pairs_found += 1
             return False
@@ -116,11 +112,70 @@ class GameModel:
             return True
         return False
 
-    #guardar el resultado
-    def save_score(self):
-        self.ranking[self.difficulty].append({"nombre": self.player_name, "movimientos": self.moves, "fecha": datetime.datetime.now()})
-        self.ranking[self.difficulty].sort(key=lambda x: x["movimientos"])#x representa el contenido del diccionario
+    #guardar el resultado(chatgpt)
+    def save_score(self,moves):
+        ranking = {
+            'facil': [],
+            'normal': [],
+            'dificil': []
+        }
+        #abrir archivo controlando que exista, para recoger datos guardados anteriormente
+        try:
+            with open('ranking.txt', 'r') as f:
+                #leer el archivo por lineas
+                lineas = f.readlines()
+                for linea in lineas:
+                    #separar las lineas en sus elementos
+                    partes = linea.strip().split(",")
+                    if len(partes) == 4:#si hay 4 elementos
+                        difficulty, name, move, date = partes #en orden iguala cada elemento
+                        if difficulty in ranking:
+                            #añadir al diccionario ranking
+                            ranking[difficulty].append({'nombre': name, 'movimientos': int(move), 'fecha': date})
+        except FileNotFoundError:
+           pass #si no existe seguirá con ranking
 
-    #cargar ranking
-    def load_scores(self):
+        #crear el nuevo ranker
+        new_ranker = {
+            'nombre': self.player_name,
+            'movimientos': moves,
+            'fecha': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        }
 
+        #añadir el nuevo ranker a su dificultad
+        if self.difficulty in ranking:
+            ranking[self.difficulty].append(new_ranker)
+
+        #ordenar por movimientos y filtrar los tres mejores
+        for difficulty in ranking:
+            ranking[difficulty] = sorted(ranking[difficulty], key=lambda x: x['movimientos'])[:3]
+
+        #grabar diccionario ranking en archivo ranking
+        with open('ranking.txt', 'w') as file:
+            for difficulty in ranking:
+                for ranker in ranking[difficulty]:
+                    #f hace que sea texto literal, las variables van entre {}
+                    file.write(f"{difficulty},{ranker['nombre']},{ranker['movimientos']},{ranker['fecha']}\n")
+
+    #cargar ranking(chatgpt)
+    @staticmethod
+    def load_scores():
+        ranking = {
+            'facil': [],
+            'normal': [],
+            'dificil': []
+        }
+
+        #abrir archivo controlando que exista(mismo procedimiento que arriba)
+        try:
+            with open('ranking.txt', 'r') as f:
+                lines = f.readlines()
+                for line in lines:
+                    part = line.strip().split(",")
+                    if len(part) == 4:
+                        difficulty, name, move, date = part
+                        if difficulty in ranking:
+                            ranking[difficulty].append({'nombre': name, 'movimientos': int(move), 'fecha': date})
+        except FileNotFoundError:
+            pass
+        return ranking
