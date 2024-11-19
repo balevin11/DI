@@ -2,10 +2,7 @@ import threading
 import random
 import time
 import datetime
-
-
 from PIL import ImageTk
-
 from recursos import download_image
 
 
@@ -42,6 +39,7 @@ class GameModel:
         self._generate_board()
         self._load_images()
 
+    #generar el tablero
     def _generate_board(self):
         cont = 0
         self.unique_image_ids =[]
@@ -61,20 +59,24 @@ class GameModel:
                         contt += 1
                 cont += 1
 
+    #descargar imágenes
     def _load_images(self):
-
         #abrir una subfunción para el hilo
         def load_images_thread():
             #inicializar variables necesarias
-            url_base = "https://raw.githubusercontent.com/balevin11/DI/main/Sprint4AmpliacionTkinter/img/"
+            url_base = ("https://raw.githubusercontent.com/"
+                        "balevin11/DI/main/Sprint4AmpliacionTkinter/img/")
 
             #descargar la hidden image
-            self.hidden_image = download_image((url_base + "hidden_image.jpg"), self.cell_size)
+            self.hidden_image = download_image((url_base +
+                                                "hidden_image.jpg"),
+                                               self.cell_size)
 
             #descargar y guardar cada imagen
             for image_id in self.unique_image_ids:
                 self.images[image_id] = download_image((url_base +
-                                        str(image_id) + ".jpg") ,self.cell_size)
+                                        str(image_id) + ".jpg") ,
+                                                       self.cell_size)
 
             #confirmar que se descargaron las imagenes
             self.images_loaded = True
@@ -119,7 +121,8 @@ class GameModel:
             'normal': [],
             'dificil': []
         }
-        #abrir archivo controlando que exista, para recoger datos guardados anteriormente
+        #abrir archivo controlando que exista, para recoger datos
+        #guardados anteriormente
         try:
             with open('ranking.txt', 'r') as f:
                 #leer el archivo por lineas
@@ -128,10 +131,13 @@ class GameModel:
                     #separar las lineas en sus elementos
                     partes = linea.strip().split(",")
                     if len(partes) == 4:#si hay 4 elementos
-                        difficulty, name, move, date = partes #en orden iguala cada elemento
+                        # #en orden iguala cada elemento
+                        difficulty, name, move, date = partes
                         if difficulty in ranking:
                             #añadir al diccionario ranking
-                            ranking[difficulty].append({'nombre': name, 'movimientos': int(move), 'fecha': date})
+                            ranking[difficulty].append({'nombre': name,
+                                                        'movimientos': int(move),
+                                                        'fecha': date})
         except FileNotFoundError:
            pass #si no existe seguirá con ranking
 
@@ -148,14 +154,16 @@ class GameModel:
 
         #ordenar por movimientos y filtrar los tres mejores
         for difficulty in ranking:
-            ranking[difficulty] = sorted(ranking[difficulty], key=lambda x: x['movimientos'])[:3]
+            ranking[difficulty] = sorted(ranking[difficulty],
+                                         key=lambda x: x['movimientos'])[:3]
 
         #grabar diccionario ranking en archivo ranking
         with open('ranking.txt', 'w') as file:
             for difficulty in ranking:
                 for ranker in ranking[difficulty]:
                     #f hace que sea texto literal, las variables van entre {}
-                    file.write(f"{difficulty},{ranker['nombre']},{ranker['movimientos']},{ranker['fecha']}\n")
+                    file.write(f"{difficulty},{ranker['nombre']},"
+                               f"{ranker['movimientos']},{ranker['fecha']}\n")
 
     #cargar ranking(chatgpt)
     @staticmethod
@@ -175,7 +183,9 @@ class GameModel:
                     if len(part) == 4:
                         difficulty, name, move, date = part
                         if difficulty in ranking:
-                            ranking[difficulty].append({'nombre': name, 'movimientos': int(move), 'fecha': date})
+                            ranking[difficulty].append({'nombre': name,
+                                                        'movimientos': int(move),
+                                                        'fecha': date})
         except FileNotFoundError:
             pass
         return ranking
