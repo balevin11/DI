@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">CatalogActivity</string>
+    <string name="imagen">Imagen</string>
+    <string name="t_tulo">Título</string>
+    <string name="descripci_n">Descripción</string>
+    <string name="me_gusta">Me gusta</string>
+    <string name="navegar_al_detalle">Navegar al detalle</string>
+    <string name="hello_world">hello world</string>
+    <string name="título">Título</string>
+    <string name="Título" />
+    <string name="descripción">Descripción</string>
+    <string name="titulo">Título</string>
+    <string name="about">About</string>
+    <string name="catalog">Catalog</string>
 </resources>
