@@ -15,13 +15,13 @@
         android:name="com.example.catalogactivity.CatalogFragment"
         tools:layout="@layout/fragment_catalog">
         <action
-            android:id="@+id/action_catalog_to_details"
-            app:destination="@id/page_details" />
+            android:id="@+id/action_catalog_to_detail"
+            app:destination="@id/page_detail" />
     </fragment>
 
     <fragment
-        android:id="@+id/page_details"
+        android:id="@+id/page_detail"
         android:name="com.example.catalogactivity.DetailFragment"
-        android:label="Fragment B" />
+        tools:layout="@layout/fragment_detail"/>
 
 </navigation>

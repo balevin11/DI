@@ -14,14 +14,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-
         setupNavigation();
     }
     private void setupNavigation(){
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_hostfragment);
         NavigationUI.setupWithNavController(
                 bottomNavigationView,
                 navHostFragment.getNavController()

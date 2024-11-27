@@ -10,7 +10,7 @@
     <androidx.fragment.app.FragmentContainerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/nav_host_fragment"
+        android:id="@+id/nav_hostfragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
