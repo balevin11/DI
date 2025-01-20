@@ -1,0 +1,54 @@
+{
+  "juegos": [
+    {
+      "titulo": "Hundir la flota",
+      "descripcion": "Hundir la flota es un juego de estrategia en el que dos jugadores colocan sus barcos en una cuadrícula y se turnan para adivinar las coordenadas donde se encuentran los barcos del oponente, con el objetivo de hundirlos antes de que el adversario lo haga.",
+      "imagen": "https://github.com/balevin11/DI/blob/main/ProyectDI/hundir_la_flota.jpg"
+    },
+    {
+      "titulo": "Ajedrez",
+      "descripcion": "El ajedrez es un juego de estrategia y táctica entre dos jugadores, donde cada uno mueve sus piezas con el objetivo de capturar al rey del oponente.",
+      "imagen": "https://raw.githubusercontent.com/balevin11/DI/ac402eab540c746c7208c5a156ec46e0045a9df9/ProyectDI/ajedrez.jpg"
+    },
+    {
+      "titulo": "Damas Chinas",
+      "descripcion": "Las damas chinas es un juego de mesa para dos a seis jugadores, en el que los jugadores deben mover sus piezas a través de un tablero con el fin de llevarlas al lado opuesto antes que el resto.",
+      "imagen": "https://raw.githubusercontent.com/balevin11/DI/ac402eab540c746c7208c5a156ec46e0045a9df9/ProyectDI/damas-chinas.jpg"
+    },
+    {
+      "titulo": "Póker",
+      "descripcion": "El póker es un juego de cartas en el que los jugadores apuestan sobre quién tiene la mejor mano, según las reglas de cada variante del póker.",
+      "imagen": "https://raw.githubusercontent.com/balevin11/DI/ac402eab540c746c7208c5a156ec46e0045a9df9/ProyectDI/poker.jpg"
+    },
+    {
+      "titulo": "Monopoly",
+      "descripcion": "Monopoly es un juego de mesa en el que los jugadores compran, venden y negocian propiedades, con el objetivo de hacer que sus oponentes quiebren.",
+      "imagen": "https://raw.githubusercontent.com/balevin11/DI/ac402eab540c746c7208c5a156ec46e0045a9df9/ProyectDI/monopoly.jpg"
+    },
+    {
+      "titulo": "Scrabble",
+      "descripcion": "Scrabble es un juego de palabras en el que los jugadores deben formar palabras con fichas de letras en un tablero, ganando puntos por cada palabra formada.",
+      "imagen": "https://raw.githubusercontent.com/balevin11/DI/ac402eab540c746c7208c5a156ec46e0045a9df9/ProyectDI/scrabble.jpg"
+    },
+    {
+      "titulo": "Risk",
+      "descripcion": "Risk es un juego de estrategia en el que los jugadores luchan por conquistar el mundo, controlando continentes y luchando contra otros jugadores.",
+      "imagen": "https://raw.githubusercontent.com/balevin11/DI/ac402eab540c746c7208c5a156ec46e0045a9df9/ProyectDI/risk.jpg"
+    },
+    {
+      "titulo": "Clue",
+      "descripcion": "Clue es un juego de misterio en el que los jugadores deben deducir quién cometió un asesinato, en qué habitación y con qué arma.",
+      "imagen": "https://raw.githubusercontent.com/balevin11/DI/ac402eab540c746c7208c5a156ec46e0045a9df9/ProyectDI/clue.jpg"
+    },
+    {
+      "titulo": "Trivial Pursuit",
+      "descripcion": "Trivial Pursuit es un juego de preguntas y respuestas en el que los jugadores avanzan en el tablero respondiendo correctamente a preguntas de diversas categorías.",
+      "imagen": "https://raw.githubusercontent.com/balevin11/DI/ac402eab540c746c7208c5a156ec46e0045a9df9/ProyectDI/Trivial_Pursuit.jpg"
+    },
+    {
+      "titulo": "Tic-Tac-Toe",
+      "descripcion": "Tic-Tac-Toe es un juego simple de dos jugadores donde cada uno debe marcar un espacio en una cuadrícula de 3x3 con el objetivo de alinear tres de sus símbolos en fila.",
+      "imagen": "https://raw.githubusercontent.com/balevin11/DI/main/ProyectDI/Tic-Tac-Toe.png"
+    }
+  ]
+}
