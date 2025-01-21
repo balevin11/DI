@@ -49,6 +49,9 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(context, "Inicio de sesión exitoso.", Toast.LENGTH_SHORT).show();
+                        //abrir activity dashboard
+                        Intent intent = new Intent(context, Dashboard_Activity.class);
+                        startActivity(intent);
                     } else {
                         Toast.makeText(context, "Error en autenticación.", Toast.LENGTH_SHORT).show();
                     }

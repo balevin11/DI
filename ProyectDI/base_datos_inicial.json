@@ -3,7 +3,7 @@
     {
       "titulo": "Hundir la flota",
       "descripcion": "Hundir la flota es un juego de estrategia en el que dos jugadores colocan sus barcos en una cuadrícula y se turnan para adivinar las coordenadas donde se encuentran los barcos del oponente, con el objetivo de hundirlos antes de que el adversario lo haga.",
-      "imagen": "https://github.com/balevin11/DI/blob/main/ProyectDI/hundir_la_flota.jpg"
+      "imagen": "https://raw.githubusercontent.com/balevin11/DI/4153e8511c7cfa49750e101b98f9223c6a33892f/ProyectDI/hundir_la_flota.jpg"
     },
     {
       "titulo": "Ajedrez",
