@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
     //inicializar variables
-    private Button registerButton,loginButton;
     private EditText editTextEmail, editTextPassword;
     private final Context context = this;
     private FirebaseAuth mAuth;
@@ -30,8 +29,8 @@ public class LoginActivity extends AppCompatActivity {
         //dar valores a las variables
         editTextEmail = findViewById(R.id.emailEditText);
         editTextPassword  = findViewById(R.id.passwordEditText);
-        registerButton = findViewById(R.id.registerButton);
-        loginButton = findViewById(R.id.loginButton);
+        Button registerButton = findViewById(R.id.registerButton);
+        Button loginButton = findViewById(R.id.loginButton);
         mAuth = FirebaseAuth.getInstance();
 
         //cuando se pulse boton login ir a metodo login

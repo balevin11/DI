@@ -27,10 +27,8 @@ public class Dashboard_Activity extends AppCompatActivity {
     private final Context context = this;
     private ImageView image;
     private TextView titleTextView, descriptionTextView;
-    private Button button;
     private FirebaseAuth mAuth;
-    private FirebaseDatabase database;
-    private DatabaseReference databaseRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //mostrar activity
@@ -39,7 +37,7 @@ public class Dashboard_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         //dar valores a las variables
         image = findViewById(R.id.imageView);
-        button = findViewById(R.id.logout);
+        Button button = findViewById(R.id.logout);
         titleTextView = findViewById(R.id.title);
         descriptionTextView = findViewById(R.id.description);
         mAuth = FirebaseAuth.getInstance();
@@ -51,8 +49,8 @@ public class Dashboard_Activity extends AppCompatActivity {
             finish();});
 
             // Obtener referencia a la base de datos de Firebase
-            database = FirebaseDatabase.getInstance("https://proyecto-di-26dcb-default-rtdb.europe-west1.firebasedatabase.app");
-            databaseRef = database.getReference("juegos");
+            FirebaseDatabase database = FirebaseDatabase.getInstance("https://proyecto-di-26dcb-default-rtdb.europe-west1.firebasedatabase.app");
+            DatabaseReference databaseRef = database.getReference("juegos");
 
             // Obtener datos del primer juego
             databaseRef.child("0").addListenerForSingleValueEvent(new ValueEventListener() {
