@@ -32,7 +32,7 @@ public class UserRepository {
                     // Crear un objeto con los datos adicionales
                     User newUser = new User(uid, fullName, email, address, phone);
                     DatabaseReference databaseRef = FirebaseDatabase
-                            .getInstance("https://proyecto-di-26dcb-default-rtdb.europe-west1.firebasedatabase.app")
+                            .getInstance("https://proyecto-di-26dcb-default-rtdb.europe-west1.firebasedatabase.app/")
                             .getReference("users");
 
                     // Guardar los datos del usuario en la base de datos bajo el UID
@@ -42,13 +42,17 @@ public class UserRepository {
                                     callback.onSuccess();  // Registro exitoso
                                 } else {
                                     callback.onFailure("Error al guardar los datos del usuario.");
-
                                 }
                             });
                 }
             } else {
-                // Si hay un error en el registro, devolver el mensaje de error
-                callback.onFailure("Error al registrar en Firebase Authentication.");
+                Exception exception = task.getException(); if (exception != null) {
+                    String errorMessage = exception.getMessage();  // Obtener el mensaje de la excepción
+                    callback.onFailure(errorMessage);
+                } else {
+                    // Si no hay un error específico, muestra un mensaje genérico
+                    callback.onFailure("Error desconocido en el registro.");
+                }
             }
         });
     }

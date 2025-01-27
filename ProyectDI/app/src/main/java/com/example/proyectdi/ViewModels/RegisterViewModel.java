@@ -6,17 +6,19 @@ import androidx.lifecycle.ViewModel;
 import com.example.proyectdi.Repositories.UserRepository;
 
 public class RegisterViewModel extends ViewModel {
-    private final MutableLiveData<String> registrationStatus = new MutableLiveData<>();  // Para indicar el estado del registro
+    //inicializar variables
     private final UserRepository userRepository;
-    private String email, password, passwordConfirm, fullName, address,phone;
-    public RegisterViewModel(String email, String password,String passwordConfirm, String fullName, String address, String phone) {
+    private final MutableLiveData<String> email = new MutableLiveData<>(),
+                                        password= new MutableLiveData<>(),
+                                        passwordConfirm = new MutableLiveData<>(),
+                                        fullName = new MutableLiveData<>(),
+                                        address = new MutableLiveData<>(),
+                                        phone = new MutableLiveData<>(),
+                                        registrationStatus = new MutableLiveData<>();
+
+    //constructor
+    public RegisterViewModel() {
         userRepository = new UserRepository();
-        this.email = email;
-        this.password = password;
-        this.passwordConfirm = passwordConfirm;
-        this.fullName = fullName;
-        this.address = address;
-        this.phone = phone;
         registerUsers();
     }
 
@@ -25,28 +27,53 @@ public class RegisterViewModel extends ViewModel {
         return registrationStatus;
     }
 
+    // Método para recibir los datos del formulario
+    public void setRegistrationDetails(String fullName, String email, String password, String passwordConfirm, String phone, String address) {
+        this.fullName.setValue(fullName);
+        this.email.setValue(email);
+        this.password.setValue(password);
+        this.passwordConfirm.setValue(passwordConfirm);
+        this.phone.setValue(phone);
+        this.address.setValue(address);
+
+        // Llamar al método para registrar
+        registerUsers();
+    }
+
     private void registerUsers() {
         //comprobar que todos los parámetros este cubiertos
-        if (email.isEmpty() || fullName.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty() || phone.isEmpty() || address.isEmpty()) {
-            registrationStatus.setValue("Todos los campos son obligatorios.");
+        if (email.getValue() == null || fullName.getValue() == null || password.getValue() == null ||
+                passwordConfirm.getValue() == null || phone.getValue() == null || address.getValue() == null ||
+                email.getValue().isEmpty() || fullName.getValue().isEmpty() || password.getValue().isEmpty() ||
+                passwordConfirm.getValue().isEmpty() || phone.getValue().isEmpty() || address.getValue().isEmpty()) {
 
+            registrationStatus.setValue("Todos los campos son obligatorios.");
+            return;
         }
         //comprobar que laa confirmacion de la contraseña sea igual a la contraseña
-        else if (!password.equals(passwordConfirm)) {
+        if (!password.getValue().equals(passwordConfirm.getValue())) {
             registrationStatus.setValue("La confirmación tiene que ser igual a la contraseña.");
-
-        }else {
-            userRepository.setUser(email, password,fullName,address, Integer.parseInt(phone), new UserRepository.RegistrationCallback(){
-                @Override
-                public void onSuccess() {
-                    registrationStatus.setValue("Registro exitoso.");
-                }
-                @Override
-                public void onFailure(String errorMessage) {
-                    registrationStatus.setValue("Error al registrar: " + errorMessage);
-                }
-            });
+            return;
         }
+        int phone_num = 0;
+        try {
+            phone_num = Integer.parseInt(phone.getValue());
+        } catch (NumberFormatException e) {
+            registrationStatus.setValue("El número de teléfono no es válido.");
+            return;
+        }
+        userRepository.setUser(email.getValue(), password.getValue(), fullName.getValue(), address.getValue(), phone_num, new UserRepository.RegistrationCallback() {
+            @Override
+            public void onSuccess() {
+                registrationStatus.setValue("Registro exitoso.");
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                registrationStatus.setValue("Error al registrar: " + errorMessage);
+            }
+        });
+
     }
 }
 
