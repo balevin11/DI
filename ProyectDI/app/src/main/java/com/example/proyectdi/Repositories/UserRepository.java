@@ -1,4 +1,5 @@
 package com.example.proyectdi.Repositories;
+
 import com.example.proyectdi.Models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -8,7 +9,6 @@ public class UserRepository {
     private FirebaseAuth mAuth;
     //constructor
     public UserRepository() {
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users");
     }
 
     // Interfaz para devolver el resultado del registro
@@ -16,6 +16,8 @@ public class UserRepository {
         void onSuccess();
         void onFailure(String errorMessage);
     }
+
+
 
     public void setUser(String email, String password, String fullName, String address, int phone, RegistrationCallback callback){//crear un nuevo usuario en firebase con gmail y contraseña, toast de error y éxito
         // Inicializa FirebaseAuth para el manejo de autenticación
@@ -53,6 +55,24 @@ public class UserRepository {
                     // Si no hay un error específico, muestra un mensaje genérico
                     callback.onFailure("Error desconocido en el registro.");
                 }
+            }
+        });
+    }
+    // Interfaz para devolver el resultado del login
+    public interface LoginCallback {
+        void onSuccess();
+        void onFailure(String errorMessage);
+    }
+
+    public void LoginUser(String email, String password, LoginCallback callback ){
+        // Inicializa FirebaseAuth para el manejo de autenticación
+        mAuth = FirebaseAuth.getInstance();
+        //iniciar sesion en firebase con email y contraseña, toast de error y éxito
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                 callback.onSuccess();
+            } else {
+                callback.onFailure("Error en autenticación.");
             }
         });
     }

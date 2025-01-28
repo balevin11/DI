@@ -55,7 +55,7 @@ public class RegisterViewModel extends ViewModel {
             registrationStatus.setValue("La confirmación tiene que ser igual a la contraseña.");
             return;
         }
-        int phone_num = 0;
+        int phone_num;
         try {
             phone_num = Integer.parseInt(phone.getValue());
         } catch (NumberFormatException e) {

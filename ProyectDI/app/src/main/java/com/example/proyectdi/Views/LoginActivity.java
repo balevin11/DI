@@ -4,57 +4,65 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import com.example.proyectdi.R;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.proyectdi.ViewModels.LoginViewModel;
+import com.example.proyectdi.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
     //inicializar variables
-    private EditText editTextEmail, editTextPassword;
     private final Context context = this;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //mostrar activity
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login);
+        ActivityLoginBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
-        //dar valores a las variables
-        editTextEmail = findViewById(R.id.emailEditText);
-        editTextPassword  = findViewById(R.id.passwordEditText);
-        Button registerButton = findViewById(R.id.registerButton);
-        Button loginButton = findViewById(R.id.loginButton);
-        mAuth = FirebaseAuth.getInstance();
+        // Crear una instancia del ViewModel
+        LoginViewModel loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+
+        //inicializar botones
+        Button loginButton = binding.loginButton;
+        Button registerButton = binding.registerButton;
 
         //cuando se pulse boton login ir a metodo login
-        loginButton.setOnClickListener(v->login());
+        loginButton.setOnClickListener(v-> {
+
+            //dar valores a las variables
+            String email = binding.emailEditText.getText().toString();
+            String password = binding.passwordEditText.getText().toString();
+
+            //pasar los valores a viewmodel
+            loginViewModel.setLoginDetails(email, password);
+
+            // Observamos el LiveData para actualizar la UI con el estado del registro
+            loginViewModel.getLoginStatus().observe(this, status -> {
+                // Actualizamos el estado en la UI
+                Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
+
+                // Si el registro fue exitoso, podemos hacer algo más (como navegar a otra actividad)
+                if (status.equals("Sesión iniciada.")) {
+                    //abrir activity dashboard
+                    Intent intent = new Intent(context, Dashboard_Activity.class);
+                    startActivity(intent);
+                }
+            });
+
+        });
+
         //cuando se pulse boton register ir a metodo register
         registerButton.setOnClickListener(v->register());
     }
+
     private void register(){
         //abrir activity register
         Intent intent = new Intent(context, RegisterActivity.class);
         startActivity(intent);
-    }
-    private void login(){
-        //iniciar sesion en firebase con email y contraseña, toast de error y éxito
-        mAuth.signInWithEmailAndPassword(editTextEmail.getText().toString(), editTextPassword.getText().toString())
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(context, "Inicio de sesión exitoso.", Toast.LENGTH_SHORT).show();
-                        //abrir activity dashboard
-                        Intent intent = new Intent(context, Dashboard_Activity.class);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(context, "Error en autenticación.", Toast.LENGTH_SHORT).show();
-                    }
-                });
     }
 }

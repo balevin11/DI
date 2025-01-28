@@ -1,6 +1,5 @@
 package com.example.proyectdi.Views;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -24,7 +23,6 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class Dashboard_Activity extends AppCompatActivity {
     //inicializar variables
-    private final Context context = this;
     private ImageView image;
     private TextView titleTextView, descriptionTextView;
     private FirebaseAuth mAuth;
