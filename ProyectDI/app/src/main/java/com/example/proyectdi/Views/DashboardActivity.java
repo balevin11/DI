@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class Dashboard_Activity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity {
     //inicializar variables
     private ImageView image;
     private TextView titleTextView, descriptionTextView;
@@ -43,7 +43,7 @@ public class Dashboard_Activity extends AppCompatActivity {
         //cuando se pulse el boton logout cerrar la actividad y la sesion
         button.setOnClickListener(v -> {
             mAuth.signOut();
-            Toast.makeText(Dashboard_Activity.this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DashboardActivity.this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
             finish();});
 
             // Obtener referencia a la base de datos de Firebase
@@ -65,7 +65,7 @@ public class Dashboard_Activity extends AppCompatActivity {
                         descriptionTextView.setText(descripcion);
 
                         // Usar Glide para cargar la imagen, para usar glide hace falta añadir una dependencia
-                        Glide.with(Dashboard_Activity.this).load(imagenUrl).into(image);
+                        Glide.with(DashboardActivity.this).load(imagenUrl).into(image);
 
                         // Agregar el log para ver la URL, el título y la descripción
                         Log.d("Firebase", "Título: " + titulo);

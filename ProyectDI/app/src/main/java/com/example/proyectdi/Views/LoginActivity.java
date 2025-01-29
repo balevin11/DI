@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                 // Si el registro fue exitoso, podemos hacer algo más (como navegar a otra actividad)
                 if (status.equals("Sesión iniciada.")) {
                     //abrir activity dashboard
-                    Intent intent = new Intent(context, Dashboard_Activity.class);
+                    Intent intent = new Intent(context, DashboardActivity.class);
                     startActivity(intent);
                 }
             });
