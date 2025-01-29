@@ -5,7 +5,6 @@ public class Games {
 
     public Games() {
     }
-
     public Games(String url, String nombre, String descripcion, String id) {
         this.url = url;
         this.nombre = nombre;
