@@ -1,6 +1,6 @@
-package com.example.proyectdi.Repositories;
+package com.example.proyectdi.repositories;
 
-import com.example.proyectdi.Models.User;
+import com.example.proyectdi.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;

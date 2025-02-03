@@ -1,11 +1,10 @@
-package com.example.proyectdi.ViewModels;
+package com.example.proyectdi.viewmodels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import com.example.proyectdi.Models.Games;
-import com.example.proyectdi.Repositories.DashboardRepository;
+import com.example.proyectdi.models.Games;
+import com.example.proyectdi.repositories.DashboardRepository;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;

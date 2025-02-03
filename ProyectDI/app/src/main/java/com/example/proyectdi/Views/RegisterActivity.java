@@ -1,4 +1,4 @@
-package com.example.proyectdi.Views;
+package com.example.proyectdi.views;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.proyectdi.R;
-import com.example.proyectdi.ViewModels.RegisterViewModel;
+import com.example.proyectdi.viewmodels.RegisterViewModel;
 import com.example.proyectdi.databinding.ActivityRegisterBinding;
 
 public class RegisterActivity extends AppCompatActivity {

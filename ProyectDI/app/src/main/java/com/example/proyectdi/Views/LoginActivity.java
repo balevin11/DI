@@ -1,4 +1,4 @@
-package com.example.proyectdi.Views;
+package com.example.proyectdi.views;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.proyectdi.R;
-import com.example.proyectdi.ViewModels.LoginViewModel;
+import com.example.proyectdi.viewmodels.LoginViewModel;
 import com.example.proyectdi.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {

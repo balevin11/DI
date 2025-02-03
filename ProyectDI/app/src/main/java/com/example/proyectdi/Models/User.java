@@ -1,4 +1,4 @@
-package com.example.proyectdi.Models;
+package com.example.proyectdi.models;
 
 public class User {
     //incializar variables

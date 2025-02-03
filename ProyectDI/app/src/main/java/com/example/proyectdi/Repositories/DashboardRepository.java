@@ -1,7 +1,9 @@
-package com.example.proyectdi.Repositories;
+package com.example.proyectdi.repositories;
+
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
-import com.example.proyectdi.Models.Games;
+import com.example.proyectdi.models.Games;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +34,7 @@ public class DashboardRepository {
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Manejo de errores
+                Log.e("Firebase", "Error al obtener datos", error.toException());
             }
         });
     }

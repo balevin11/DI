@@ -1,9 +1,9 @@
-package com.example.proyectdi.ViewModels;
+package com.example.proyectdi.viewmodels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import com.example.proyectdi.Repositories.UserRepository;
+import com.example.proyectdi.repositories.UserRepository;
 
 public class RegisterViewModel extends ViewModel {
     //inicializar variables
@@ -50,7 +50,7 @@ public class RegisterViewModel extends ViewModel {
             registrationStatus.setValue("Todos los campos son obligatorios.");
             return;
         }
-        //comprobar que laa confirmacion de la contraseña sea igual a la contraseña
+        //comprobar que lea confirmacion de la contraseña sea igual a la contraseña
         if (!password.getValue().equals(passwordConfirm.getValue())) {
             registrationStatus.setValue("La confirmación tiene que ser igual a la contraseña.");
             return;

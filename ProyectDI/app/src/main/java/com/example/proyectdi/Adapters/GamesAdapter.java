@@ -1,11 +1,13 @@
-package com.example.proyectdi.Adapters;
+package com.example.proyectdi.adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.example.proyectdi.databinding.AdapterGamesBinding;
-import com.example.proyectdi.Models.Games;
+import com.example.proyectdi.models.Games;
 import com.example.proyectdi.R;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import java.util.List;
@@ -44,6 +46,10 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
     public void onBindViewHolder(@NonNull GamesViewHolder holder, int position) {
         // Obtener el objeto Games en la posición correspondiente de la lista
         Games game = games.get(position);
+        // Usamos Glide para cargar la imagen desde la URL
+        Glide.with(holder.itemView.getContext())
+                .load(game.getImagen())
+                .into(holder.binding.imageView);
         // Vincular el objeto de datos al ViewHolder
         holder.bind(game);
     }

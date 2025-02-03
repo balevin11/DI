@@ -1,10 +1,10 @@
-package com.example.proyectdi.ViewModels;
+package com.example.proyectdi.viewmodels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.proyectdi.Repositories.UserRepository;
+import com.example.proyectdi.repositories.UserRepository;
 
 public class LoginViewModel extends ViewModel {
     //inicializar variables
