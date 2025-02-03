@@ -24,12 +24,12 @@ public class LoginViewModel extends ViewModel {
         return loginStatus;
     }
 
-    // Método para recibir los datos del formulario
+    // Métod para recibir los datos del formulario
     public void setLoginDetails(String email, String password) {
         this.email.setValue(email);
         this.password.setValue(password);
 
-        // Llamar al método para iniciar sesion
+        // Llamar al métod para iniciar sesion
         loginUser();
     }
 

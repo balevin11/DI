@@ -43,8 +43,10 @@ public class LoginActivity extends AppCompatActivity {
 
             // Observamos el LiveData para actualizar la UI con el estado del registro
             loginViewModel.getLoginStatus().observe(this, status -> {
-                // Actualizamos el estado en la UI
-                Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
+
+                if (status != null)
+                    // Actualizamos el estado en la UI
+                    Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
 
                 // Si el registro fue exitoso, podemos hacer algo más (como navegar a otra actividad)
                 if (status.equals("Sesión iniciada.")) {
