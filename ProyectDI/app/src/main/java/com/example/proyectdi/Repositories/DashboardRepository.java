@@ -17,7 +17,7 @@ public class DashboardRepository {
     private final DatabaseReference gamesRef;
 
     public DashboardRepository() {
-        gamesRef = FirebaseDatabase.getInstance().getReference("juegos");
+        gamesRef = FirebaseDatabase.getInstance().getReference("juegos");;
     }
 
     public void getGames(MutableLiveData<List<Games>> gamesLiveData) {

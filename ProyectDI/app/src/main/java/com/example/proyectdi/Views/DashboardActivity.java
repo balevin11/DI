@@ -1,5 +1,6 @@
 package com.example.proyectdi.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -23,7 +24,7 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //mostrar activity
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+
         ActivityDashboardBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard);
 
         Button button = binding.logout;
@@ -38,6 +39,8 @@ public class DashboardActivity extends AppCompatActivity {
         button.setOnClickListener(v -> {
             dashboardViewModel.logout();
             Toast.makeText(DashboardActivity.this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
+            startActivity(intent);
             finish();
         });
     }
