@@ -80,5 +80,8 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
             binding.executePendingBindings();
         }
     }
+    public interface OnGamesClickListener {
+        void onGamesClick(Games game);
+    }
 }
 

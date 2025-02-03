@@ -14,6 +14,8 @@ public class DashboardViewModel extends ViewModel {
     private final MutableLiveData<List<Games>> gamesLiveData = new MutableLiveData<>();
     private final DashboardRepository dashboardRepository;
 
+    private MutableLiveData<Games> selectedGame = new MutableLiveData<>();
+
     //constructor
     public DashboardViewModel() {
         dashboardRepository = new DashboardRepository();
@@ -33,6 +35,13 @@ public class DashboardViewModel extends ViewModel {
     public void logout(){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.signOut();
+    }
+    public LiveData<Games> getSelectedGame() {
+        return selectedGame;
+    }
+
+    public void selectGame(Games game) {
+        selectedGame.setValue(game);
     }
 }
 
