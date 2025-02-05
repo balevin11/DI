@@ -2,19 +2,17 @@ package com.example.proyectdi.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import com.example.proyectdi.R;
-import com.example.proyectdi.adapters.GamesAdapter;
 import com.example.proyectdi.databinding.ActivityDetailsBinding;
-import com.example.proyectdi.viewmodels.DashboardViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 
 public class DetailsActivity extends AppCompatActivity {
+
+    private boolean isFavorite = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +34,17 @@ public class DetailsActivity extends AppCompatActivity {
             Glide.with(this)
                     .load(imagen)
                     .into(binding.imageView);
+
+            FloatingActionButton fav = binding.fav;
+            fav.setOnClickListener(view -> {
+                if (isFavorite) {
+                    fav.setImageResource(R.drawable.favorite_border);  // Cambiar a favorite_border
+                } else {
+                    fav.setImageResource(R.drawable.favorite);  // Cambiar a favorite
+                }
+                isFavorite = !isFavorite;  // Alternar el estado
+            });
         }
+
     }
 }

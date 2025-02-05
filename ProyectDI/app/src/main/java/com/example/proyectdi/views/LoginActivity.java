@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         // Crear una instancia del ViewModel
         LoginViewModel loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
+
         //inicializar botones
         Button loginButton = binding.loginButton;
         Button registerButton = binding.registerButton;
@@ -44,15 +45,22 @@ public class LoginActivity extends AppCompatActivity {
             // Observamos el LiveData para actualizar la UI con el estado del registro
             loginViewModel.getLoginStatus().observe(this, status -> {
 
-                if (status != null)
+
+
+                // Si el registro fue exitoso, podemos hacer algo más (como navegar a otra actividad)
+                assert status != null;
+                if (status.equals("Sesión iniciada.")) {
+                    //abrir activity dashboard
+                    Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, DashboardActivity.class);
+
+                    startActivity(intent);
+                }else{
+
                     // Actualizamos el estado en la UI
                     Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
 
-                // Si el registro fue exitoso, podemos hacer algo más (como navegar a otra actividad)
-                if (status.equals("Sesión iniciada.")) {
-                    //abrir activity dashboard
-                    Intent intent = new Intent(context, DashboardActivity.class);
-                    startActivity(intent);
+
                 }
             });
 

@@ -1,11 +1,8 @@
 package com.example.proyectdi.views;
 
-import static com.example.proyectdi.BR.games;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
