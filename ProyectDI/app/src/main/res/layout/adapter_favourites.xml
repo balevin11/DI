@@ -18,7 +18,8 @@
             android:textSize="20sp"
             android:layout_marginTop="20dp"
             android:textStyle="bold"
-            android:text="@{games.titulo}" />
+            android:text="@{games.titulo}"
+        />
 
         <TextView
             android:id="@+id/gameDescription"
@@ -28,13 +29,15 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:text="@{String.valueOf(games.descripcion)}" />
+            android:text="@{String.valueOf(games.descripcion)}"
+        />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            />
+            android:contentDescription="@{String.valueOf(games.descripcion)}"/>
+
 
     </LinearLayout>
 </layout>
