@@ -10,11 +10,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.proyectdi.adapters.GamesAdapter;
 import com.example.proyectdi.R;
-import com.example.proyectdi.models.Games;
 import com.example.proyectdi.viewmodels.DashboardViewModel;
 import com.example.proyectdi.databinding.ActivityDashboardBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -26,7 +24,6 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //mostrar activity
         super.onCreate(savedInstanceState);
-
         ActivityDashboardBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard);
 
         Button button = binding.logout;
