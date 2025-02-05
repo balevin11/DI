@@ -2,25 +2,41 @@ package com.example.proyectdi.viewmodels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
-import com.example.proyectdi.models.Games;
+import androidx.lifecycle.ViewModel;
 import com.example.proyectdi.repositories.DetailsRepository;
-import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.List;
-
-public class DetailsViewModel {
+public class DetailsViewModel extends ViewModel {
     //inicializar variables
-    private final MutableLiveData<Games> gameLiveData = new MutableLiveData<>();
     private final DetailsRepository detailsRepository;
-
+    private final MutableLiveData<Boolean> isFavorite = new MutableLiveData<>();
     //constructor
     public DetailsViewModel() {
         detailsRepository = new DetailsRepository();
-        loadFavorite();
     }
-    private void loadFavorite() {
-        detailsRepository.getFavorite(gameLiveData);
+
+
+    // Verificar si el juego está en favoritos
+    public void checkFavorite(int juegoIndex) {
+        detailsRepository.isGameFavorite(juegoIndex).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                // Si el juego existe en Firebase, es un favorito
+                isFavorite.setValue(task.getResult().exists());
+            }
+        });
+    }
+    // Agregar juego a favoritos
+    public void addFavorite(int juegoIndex) {
+        detailsRepository.addFavorite(juegoIndex);
+        isFavorite.setValue(true);
+    }
+    // Eliminar juego de favoritos
+    public void removeFavorite(int juegoIndex) {
+        detailsRepository.removeGameFromFavorites(juegoIndex);
+        isFavorite.setValue(false);
+    }
+
+    public LiveData<Boolean> getIsFavorite() {
+        return isFavorite;
     }
 
 }

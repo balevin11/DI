@@ -46,14 +46,12 @@ public class LoginActivity extends AppCompatActivity {
             loginViewModel.getLoginStatus().observe(this, status -> {
 
 
-
                 // Si el registro fue exitoso, podemos hacer algo más (como navegar a otra actividad)
                 assert status != null;
                 if (status.equals("Sesión iniciada.")) {
                     //abrir activity dashboard
                     Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, DashboardActivity.class);
-
                     startActivity(intent);
                 }else{
 

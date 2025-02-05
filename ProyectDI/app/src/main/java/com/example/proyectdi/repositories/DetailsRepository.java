@@ -4,7 +4,7 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.proyectdi.models.Games;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,28 +36,20 @@ public class DetailsRepository {
             // Si no hay un usuario autenticado
             Log.d("UID", "No hay usuario autenticado.");
         }
-        userRef = FirebaseDatabase.getInstance().getReference("user/n6saieEi64MbRnMmcm7D3yewN3i2/favourites");
+        userRef = FirebaseDatabase.getInstance().getReference("users/"+ uid +"/favourites");
 
     }
-    public void addFavorite(){
-        userRef.child("0").setValue(true);
+    public void addFavorite(int gameIndex){
+        userRef.child(String.valueOf(gameIndex)).setValue(true);
     }
-    public void getFavorite(MutableLiveData<List<Games>> gameLiveData){
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                List<String> favorites = new ArrayList<>();
-                for (DataSnapshot child : snapshot.getChildren()) {
-                    favorites.add(child.getKey());
-                }
-                // Usar los favoritos
-                gameLiveData.setValue(games);
-            }
+    // Métod para eliminar el juego de favoritos
+    public void removeGameFromFavorites(int juegoIndex) {
+        userRef.child(String.valueOf(juegoIndex)).removeValue();
+    }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Manejo de errores
-            }
-        });
+    // Métod para verificar si el juego está en favoritos
+    public Task<DataSnapshot> isGameFavorite(int juegoIndex) {
+        return userRef.child(String.valueOf(juegoIndex)).get();
     }
+
 }

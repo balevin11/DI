@@ -13,12 +13,14 @@ import com.example.proyectdi.R;
 import com.example.proyectdi.models.Games;
 import com.example.proyectdi.viewmodels.DashboardViewModel;
 import com.example.proyectdi.databinding.ActivityDashboardBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class DashboardActivity extends AppCompatActivity implements GamesAdapter.OnGameClickListener{
+public class DashboardActivity extends AppCompatActivity {
     //inicializar variables
     private GamesAdapter gamesAdapter;
+    private FloatingActionButton fav;
     private DashboardViewModel dashboardViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +30,7 @@ public class DashboardActivity extends AppCompatActivity implements GamesAdapter
         ActivityDashboardBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard);
 
         Button button = binding.logout;
-        gamesAdapter = new GamesAdapter(new ArrayList<>(),this);
+        gamesAdapter = new GamesAdapter(new ArrayList<>());
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(gamesAdapter);
 
@@ -49,19 +51,12 @@ public class DashboardActivity extends AppCompatActivity implements GamesAdapter
             startActivity(intent);
             finish();
         });
-    }
-        @Override
-        public void onGameClick(Games game) {
-            // Crear un Intent para ir a DetailsActivity
-            Intent intent = new Intent(DashboardActivity.this, DetailsActivity.class);
-
-            // Pasar los datos del juego seleccionado (título, descripción e imagen)
-            intent.putExtra("titulo", game.getTitulo());
-            intent.putExtra("descripcion", game.getDescripcion());
-            intent.putExtra("imagen", game.getImagen());
-
-            // Iniciar la actividad DetailsActivity
+        fav = binding.favorites;
+        fav.setOnClickListener(view -> {
+            Intent intent = new Intent(DashboardActivity.this, FavouritesActivity.class);
             startActivity(intent);
-        }
+        });
+    }
+
 
 }

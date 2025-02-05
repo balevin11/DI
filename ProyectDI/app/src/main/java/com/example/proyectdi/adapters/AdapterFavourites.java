@@ -4,26 +4,30 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
+import com.example.proyectdi.R;
 import com.example.proyectdi.databinding.AdapterGamesBinding;
 import com.example.proyectdi.models.Games;
-import com.example.proyectdi.R;
 import com.example.proyectdi.views.DetailsActivity;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.util.List;
 
-public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHolder> {
+public class AdapterFavourites extends RecyclerView.Adapter<GamesAdapter.GamesViewHolder> {
 
     // Lista de objetos juegos que serán mostrados
     private List<Games> games;
-    private OnGameClickListener listener;
+    private GamesAdapter.OnGameClickListener listener;
     // Constructor
     public GamesAdapter(List<Games> games) {
         this.games = games;
     }
-    public GamesAdapter(List<Games> games, OnGameClickListener listener) {
+    public GamesAdapter(List<Games> games, GamesAdapter.OnGameClickListener listener) {
         this.games = games;
         this.listener = listener;
     }
@@ -37,7 +41,7 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
     // Métod que crea un nuevo ViewHolder para cada item
     @NonNull
     @Override
-    public GamesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public GamesAdapter.GamesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflar el layout usando DataBinding y obtener el binding correspondiente
         AdapterGamesBinding binding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),// Obtiene el LayoutInflater
@@ -45,12 +49,12 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
                 parent,// El contenedor (ViewGroup) padre
                 false// No se adjunta aún a la vista
         );
-        return new GamesViewHolder(binding);// Retorna un nuevo ViewHolder con el binding
+        return new GamesAdapter.GamesViewHolder(binding);// Retorna un nuevo ViewHolder con el binding
     }
 
     // Métod que vincula los datos del objeto Games con las vistas del ViewHolder
     @Override
-    public void onBindViewHolder(@NonNull GamesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GamesAdapter.GamesViewHolder holder, int position) {
         // Obtener el objeto Games en la posición correspondiente de la lista
         Games game = games.get(position);
         // Usamos Glide para cargar la imagen desde la URL
@@ -59,19 +63,6 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
                 .into(holder.binding.imageView);
         // Vincular el objeto de datos al ViewHolder
         holder.bind(game);
-        holder.itemView.setOnClickListener(v -> {
-            // Crear un Intent para ir a DetailsActivity
-            Intent intent = new Intent(v.getContext(), DetailsActivity.class);
-
-            // Pasar los datos del juego seleccionado (título, descripción e imagen)
-            intent.putExtra("titulo", game.getTitulo());
-            intent.putExtra("descripcion", game.getDescripcion());
-            intent.putExtra("imagen", game.getImagen());
-            intent.putExtra("gameIndex", position);
-            // Iniciar la actividad DetailsActivity
-            v.getContext().startActivity(intent);
-        });
-
     }
 
     // Métod que retorna el número de elementos en la lista de juegos
@@ -106,8 +97,6 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
         }
 
     }
-    public interface OnGameClickListener {
-        void onGameClick(Games game);
-    }
+
 }
 

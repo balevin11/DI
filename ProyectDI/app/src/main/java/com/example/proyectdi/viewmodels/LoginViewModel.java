@@ -12,7 +12,7 @@ public class LoginViewModel extends ViewModel {
     private final MutableLiveData<String> email = new MutableLiveData<>(),
                                         password = new MutableLiveData<>(),
                                         loginStatus = new MutableLiveData<>();
-
+    public boolean is_loading = false;
     //constructor
     public LoginViewModel() {
         userRepository = new UserRepository();
@@ -40,17 +40,19 @@ public class LoginViewModel extends ViewModel {
         if (email.getValue() == null ||password.getValue() == null ||
                 email.getValue().isEmpty() || password.getValue().isEmpty()) {
             loginStatus.setValue("Todos los campos son obligatorios.");
+
             return;
         }
         userRepository.LoginUser(email.getValue(),password.getValue(),new UserRepository.LoginCallback() {
             @Override
             public void onSuccess() {
                 loginStatus.setValue("Sesión iniciada.");
-            }
 
+            }
             @Override
             public void onFailure(String errorMessage) {
                 loginStatus.setValue("Error al iniciar sesión: " + errorMessage);
+
             }
 
         });
