@@ -12,7 +12,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Full Name"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+        />
 
         <EditText
             android:id="@+id/emailEditText"
@@ -20,7 +21,8 @@
             android:layout_height="wrap_content"
             android:hint="Email"
             android:textSize="20dp"
-            />
+
+        />
 
         <EditText
             android:id="@+id/passwordEditText"
@@ -28,7 +30,8 @@
             android:layout_height="wrap_content"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+        />
 
         <EditText
             android:id="@+id/passwordConfirmEditText"
@@ -36,28 +39,32 @@
             android:layout_height="wrap_content"
             android:hint="Confirm Password"
             android:inputType="textPassword"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+        />
 
         <EditText
             android:id="@+id/phoneEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Phone"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+        />
 
         <EditText
             android:id="@+id/addressEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Address"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+        />
 
         <Button
+            style="@style/ButtonStyle"
             android:id="@+id/registerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register"
 
-            />
+        />
     </LinearLayout>
 </layout>

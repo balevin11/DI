@@ -48,6 +48,7 @@ public class RegisterViewModel extends ViewModel {
                 passwordConfirm.getValue().isEmpty() || phone.getValue().isEmpty() || address.getValue().isEmpty()) {
 
             registrationStatus.setValue("Todos los campos son obligatorios.");
+
             return;
         }
         //comprobar que lea confirmacion de la contraseña sea igual a la contraseña

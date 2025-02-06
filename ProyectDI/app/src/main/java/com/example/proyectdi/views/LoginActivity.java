@@ -2,11 +2,13 @@ package com.example.proyectdi.views;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.proyectdi.R;
@@ -24,8 +26,18 @@ public class LoginActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         ActivityLoginBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
+        // si darkmode está activado
+        SharedPreferences sharedPrefs = getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
+        boolean darkMode = sharedPrefs.getBoolean("darkMode", false);
+        if (darkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
         // Crear una instancia del ViewModel
         LoginViewModel loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+
 
         //inicializar botones
         Button loginButton = binding.loginButton;
@@ -44,15 +56,20 @@ public class LoginActivity extends AppCompatActivity {
             // Observamos el LiveData para actualizar la UI con el estado del registro
             loginViewModel.getLoginStatus().observe(this, status -> {
 
-                if (status != null)
+
+                // Si el registro fue exitoso, podemos hacer algo más (como navegar a otra actividad)
+                assert status != null;
+                if (status.equals("Sesión iniciada.")) {
+                    //abrir activity dashboard
+                    Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, DashboardActivity.class);
+                    startActivity(intent);
+                }else{
+
                     // Actualizamos el estado en la UI
                     Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
 
-                // Si el registro fue exitoso, podemos hacer algo más (como navegar a otra actividad)
-                if (status.equals("Sesión iniciada.")) {
-                    //abrir activity dashboard
-                    Intent intent = new Intent(context, DashboardActivity.class);
-                    startActivity(intent);
+
                 }
             });
 

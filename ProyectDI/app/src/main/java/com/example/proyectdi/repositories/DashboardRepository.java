@@ -2,6 +2,7 @@ package com.example.proyectdi.repositories;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import com.example.proyectdi.models.Games;
 import com.google.firebase.database.DataSnapshot;
@@ -17,13 +18,13 @@ public class DashboardRepository {
     private final DatabaseReference gamesRef;
 
     public DashboardRepository() {
-        gamesRef = FirebaseDatabase.getInstance().getReference("juegos");;
+        gamesRef = FirebaseDatabase.getInstance().getReference("juegos");
     }
 
     public void getGames(MutableLiveData<List<Games>> gamesLiveData) {
         gamesRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Games> games = new ArrayList<>();
                 for (DataSnapshot child : snapshot.getChildren()) {
                     Games game = child.getValue(Games.class);
@@ -33,7 +34,7 @@ public class DashboardRepository {
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("Firebase", "Error al obtener datos", error.toException());
             }
         });

@@ -13,29 +13,36 @@
             android:layout_height="wrap_content"
             android:hint="Email"
             android:textSize="20dp"
-            />
+
+        />
 
         <EditText
+
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+        />
 
         <Button
+            style="@style/ButtonStyle"
             android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Login"
-            />
+
+        />
 
         <Button
+            style="@style/ButtonStyle"
             android:id="@+id/registerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register"
-            />
+
+        />
 
     </LinearLayout>
 </layout>

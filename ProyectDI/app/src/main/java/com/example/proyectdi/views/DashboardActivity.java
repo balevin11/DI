@@ -1,25 +1,24 @@
 package com.example.proyectdi.views;
 
-import static com.example.proyectdi.BR.games;
-
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
-
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.proyectdi.adapters.GamesAdapter;
 import com.example.proyectdi.R;
-import com.example.proyectdi.models.Games;
 import com.example.proyectdi.viewmodels.DashboardViewModel;
 import com.example.proyectdi.databinding.ActivityDashboardBinding;
-
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
-public class DashboardActivity extends AppCompatActivity implements GamesAdapter.OnGameClickListener{
+public class DashboardActivity extends AppCompatActivity {
     //inicializar variables
     private GamesAdapter gamesAdapter;
     private DashboardViewModel dashboardViewModel;
@@ -27,11 +26,18 @@ public class DashboardActivity extends AppCompatActivity implements GamesAdapter
     protected void onCreate(Bundle savedInstanceState) {
         //mostrar activity
         super.onCreate(savedInstanceState);
-
         ActivityDashboardBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard);
 
+        SharedPreferences sharedPrefs = getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
+        boolean darkModes = sharedPrefs.getBoolean("darkMode", false);
+        if (darkModes) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
         Button button = binding.logout;
-        gamesAdapter = new GamesAdapter(new ArrayList<>(),this);
+        gamesAdapter = new GamesAdapter(new ArrayList<>());
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(gamesAdapter);
 
@@ -52,19 +58,23 @@ public class DashboardActivity extends AppCompatActivity implements GamesAdapter
             startActivity(intent);
             finish();
         });
-    }
-        @Override
-        public void onGameClick(Games game) {
-            // Crear un Intent para ir a DetailsActivity
-            Intent intent = new Intent(DashboardActivity.this, DetailsActivity.class);
-
-            // Pasar los datos del juego seleccionado (título, descripción e imagen)
-            intent.putExtra("titulo", game.getTitulo());
-            intent.putExtra("descripcion", game.getDescripcion());
-            intent.putExtra("imagen", game.getImagen());
-
-            // Iniciar la actividad DetailsActivity
+        FloatingActionButton fav = binding.favorites;
+        fav.setOnClickListener(view -> {
+            Intent intent = new Intent(DashboardActivity.this, FavouritesActivity.class);
             startActivity(intent);
-        }
+        });
+        FloatingActionButton darkMode = binding.darkMode;
+        darkMode.setOnClickListener(view -> {
+            // si darkmode está activado
+            SharedPreferences sharedPref = getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
+            boolean isDarkMode = sharedPref.getBoolean("darkMode", false);
+            SharedPreferences.Editor editors = sharedPref.edit();
+            editors.putBoolean("darkMode", !isDarkMode);
+            editors.apply();
+            recreate();
+        });
+
+    }
+
 
 }
