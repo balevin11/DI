@@ -15,7 +15,6 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Fa
 
     // Lista de objetos juegos que serán mostrados
     private List<Games> games;
-    private GamesAdapter.OnGameClickListener listener;
     // Constructor
     public FavouritesAdapter(List<Games> games) {
         this.games = games;

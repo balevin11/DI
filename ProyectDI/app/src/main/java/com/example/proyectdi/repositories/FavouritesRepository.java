@@ -1,6 +1,8 @@
 package com.example.proyectdi.repositories;
 
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import com.example.proyectdi.models.Games;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,7 +41,7 @@ public class FavouritesRepository {
     public void getFavorites(MutableLiveData<List<String>> favouritesLiveData){
         userFavouritesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<String> favorites = new ArrayList<>();
                 for (DataSnapshot child : snapshot.getChildren()) {
                     favorites.add(child.getKey());
@@ -48,7 +50,7 @@ public class FavouritesRepository {
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {
                 // Manejo de errores
             }
         });
@@ -65,7 +67,7 @@ public class FavouritesRepository {
             // Obtener el juego correspondiente de Firebase usando el índice
             gamesRef.child(String.valueOf(position)).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot snapshot) {
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
                     Games game = snapshot.getValue(Games.class);
                     if (game != null) {
                         // Si el juego existe, lo añadimos a la lista de juegos favoritos
@@ -79,7 +81,7 @@ public class FavouritesRepository {
                 }
 
                 @Override
-                public void onCancelled(DatabaseError error) {
+                public void onCancelled(@NonNull DatabaseError error) {
                     Log.e("Firebase", "Error al obtener el juego favorito", error.toException());
                 }
             });

@@ -11,8 +11,8 @@ import java.util.List;
 
 public class FavouritesViewModel extends ViewModel {
     //inicializar variables
-    private MutableLiveData<List<Games>> gamesLiveData = new MutableLiveData<>();
-    private FavouritesRepository favouritesRepository;
+    private final MutableLiveData<List<Games>> gamesLiveData = new MutableLiveData<>();
+    private final FavouritesRepository favouritesRepository;
 
     //constructor
     public FavouritesViewModel() {

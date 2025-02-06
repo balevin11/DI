@@ -2,11 +2,13 @@ package com.example.proyectdi.views;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.proyectdi.R;
@@ -23,6 +25,15 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         ActivityLoginBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+
+        // si darkmode está activado
+        SharedPreferences sharedPrefs = getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
+        boolean darkMode = sharedPrefs.getBoolean("darkMode", false);
+        if (darkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
 
         // Crear una instancia del ViewModel
         LoginViewModel loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);

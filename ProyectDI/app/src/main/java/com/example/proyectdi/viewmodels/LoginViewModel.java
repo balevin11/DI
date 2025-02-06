@@ -12,7 +12,7 @@ public class LoginViewModel extends ViewModel {
     private final MutableLiveData<String> email = new MutableLiveData<>(),
                                         password = new MutableLiveData<>(),
                                         loginStatus = new MutableLiveData<>();
-    public boolean is_loading = false;
+
     //constructor
     public LoginViewModel() {
         userRepository = new UserRepository();

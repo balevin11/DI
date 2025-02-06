@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 public class FavouritesActivity extends AppCompatActivity {
     private FavouritesAdapter favouritesAdapter;
-    private FavouritesViewModel favouritesViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +26,7 @@ public class FavouritesActivity extends AppCompatActivity {
         binding.recyclerViewFav.setLayoutManager(new LinearLayoutManager(this)); // Configura el RecyclerView
         binding.recyclerViewFav.setAdapter(favouritesAdapter); // Establece el adaptador
 
-        favouritesViewModel = new ViewModelProvider(this).get(FavouritesViewModel.class);
+        FavouritesViewModel favouritesViewModel = new ViewModelProvider(this).get(FavouritesViewModel.class);
         favouritesViewModel.getGamesLiveData().observe(this, games -> {
             if (games != null) {
                 favouritesAdapter.setGames(games); // Actualiza la lista del RecyclerView
