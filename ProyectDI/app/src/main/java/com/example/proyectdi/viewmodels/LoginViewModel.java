@@ -35,7 +35,8 @@ public class LoginViewModel extends ViewModel {
 
 
     public void loginUser(){
-
+        //login status igual a hola para evitar repeticiones
+        loginStatus.setValue("hola");
         //comprobar que todos los parámetros este cubiertos
         if (email.getValue() == null ||password.getValue() == null ||
                 email.getValue().isEmpty() || password.getValue().isEmpty()) {

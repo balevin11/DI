@@ -41,19 +41,20 @@ public class RegisterActivity extends AppCompatActivity {
             registerViewModel.setRegistrationDetails(fullName, email, password, passwordConfirm, phone, address);
             // Observamos el LiveData para actualizar la UI con el estado del registro
             registerViewModel.getRegistrationStatus().observe(this, status -> {
-                // Actualizamos el estado en la UI
-                Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
+                //esto es un control para que no aparezcan dos toast
+                if (!status.equals("hola")){
+                    // Actualizamos el estado en la UI
+                    Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
 
-                // Si el registro fue exitoso, podemos hacer algo más (como navegar a otra actividad)
-                if (status.equals("Registro exitoso.")) {
-                    // Redirigir a la pantalla de login
-                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish(); // Cerramos la actividad actual
+                    // Si el registro fue exitoso, podemos hacer algo más (como navegar a otra actividad)
+                    if (status.equals("Registro exitoso.")) {
+                        // Redirigir a la pantalla de login
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish(); // Cerramos la actividad actual
+                    }
                 }
             });
         });
     }
 }
-
-
