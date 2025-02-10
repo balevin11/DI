@@ -41,6 +41,8 @@ public class RegisterViewModel extends ViewModel {
     }
 
     private void registerUsers() {
+        //login status igual a hola para evitar repeticiones
+        registrationStatus.setValue("hola");
         //comprobar que todos los parámetros este cubiertos
         if (email.getValue() == null || fullName.getValue() == null || password.getValue() == null ||
                 passwordConfirm.getValue() == null || phone.getValue() == null || address.getValue() == null ||

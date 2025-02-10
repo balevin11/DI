@@ -19,15 +19,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 public class DashboardActivity extends AppCompatActivity {
-    //inicializar variables
     private GamesAdapter gamesAdapter;
     private DashboardViewModel dashboardViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //mostrar activity
         super.onCreate(savedInstanceState);
         ActivityDashboardBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard);
 
+        // Configuración del modo oscuro basado en SharedPreferences
         SharedPreferences sharedPrefs = getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
         boolean darkModes = sharedPrefs.getBoolean("darkMode", false);
         if (darkModes) {
@@ -37,10 +38,22 @@ public class DashboardActivity extends AppCompatActivity {
         }
 
         Button button = binding.logout;
-        gamesAdapter = new GamesAdapter(new ArrayList<>());
+
+        // Inicializar el adapter con un listener que lanza DetailsActivity
+        gamesAdapter = new GamesAdapter(new ArrayList<>(), (game, position) -> {
+            // Crear el Intent para lanzar DetailsActivity
+            Intent intent = new Intent(DashboardActivity.this, DetailsActivity.class);
+            intent.putExtra("titulo", game.getTitulo());
+            intent.putExtra("descripcion", game.getDescripcion());
+            intent.putExtra("imagen", game.getImagen());
+            intent.putExtra("gameIndex", position);
+            startActivity(intent);
+        });
+
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(gamesAdapter);
 
+        // Observa el LiveData para actualizar la lista de juegos
         dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
         dashboardViewModel.getGamesLiveData().observe(this, games -> {
             if (games != null) {
@@ -58,11 +71,15 @@ public class DashboardActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+        // Acción para el botón de favoritos
         FloatingActionButton fav = binding.favorites;
         fav.setOnClickListener(view -> {
             Intent intent = new Intent(DashboardActivity.this, FavouritesActivity.class);
             startActivity(intent);
         });
+
+        // Alterna el modo oscuro y recrea la actividad para aplicar el cambio
         FloatingActionButton darkMode = binding.darkMode;
         darkMode.setOnClickListener(view -> {
             // si darkmode está activado

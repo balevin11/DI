@@ -19,6 +19,7 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
     // Lista de objetos juegos que serán mostrados
     private List<Games> games;
     private OnGameClickListener listener;
+
     // Constructor
     public GamesAdapter(List<Games> games) {
         this.games = games;
@@ -51,27 +52,13 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
     // Métod que vincula los datos del objeto Games con las vistas del ViewHolder
     @Override
     public void onBindViewHolder(@NonNull GamesViewHolder holder, int position) {
-        // Obtener el objeto Games en la posición correspondiente de la lista
         Games game = games.get(position);
-        // Usamos Glide para cargar la imagen desde la URL
+        // Cargar la imagen usando Glide
         Glide.with(holder.itemView.getContext())
                 .load(game.getImagen())
                 .into(holder.binding.imageView);
-        // Vincular el objeto de datos al ViewHolder
-        holder.bind(game);
-        holder.itemView.setOnClickListener(v -> {
-            // Crear un Intent para ir a DetailsActivity
-            Intent intent = new Intent(v.getContext(), DetailsActivity.class);
-
-            // Pasar los datos del juego seleccionado (título, descripción e imagen)
-            intent.putExtra("titulo", game.getTitulo());
-            intent.putExtra("descripcion", game.getDescripcion());
-            intent.putExtra("imagen", game.getImagen());
-            intent.putExtra("gameIndex", position);
-            // Iniciar la actividad DetailsActivity
-            v.getContext().startActivity(intent);
-        });
-
+        // Delegar el bind, el cual configura el listener
+        holder.bind(game, position);
     }
 
     // Métod que retorna el número de elementos en la lista de juegos
@@ -93,13 +80,13 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
         }
 
         // Métod que asigna los datos al binding y actualiza las vistas
-        public void bind(Games games) {
+        public void bind(Games games, int position) {
             // Asigna el objeto games al binding para que los datos se enlacen a las vistas
             binding.setGames(games);
             // Ejecuta cualquier enlace pendiente para asegurarse de que se actualicen las vistas
             binding.executePendingBindings();
             if (listener != null) {
-                binding.getRoot().setOnClickListener(v -> listener.onGameClick(games));
+                binding.getRoot().setOnClickListener(v -> listener.onGameClick(games, position));
             } else {
                 Log.e("GamesAdapter", "Listener is null!");
             }
@@ -107,7 +94,7 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
 
     }
     public interface OnGameClickListener {
-        void onGameClick(Games game);
+        void onGameClick(Games game, int position);
     }
 }
 
