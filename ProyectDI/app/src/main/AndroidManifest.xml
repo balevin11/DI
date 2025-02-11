@@ -13,13 +13,18 @@
         android:theme="@style/Theme.ProyectDI"
         tools:targetApi="31">
         <activity
-            android:name=".views.FavouritesActivity"
+            android:name=".views.MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.ProyectDI.NoActionBar" />
+        <activity
+            android:name=".views.FavouritesFragment"
             android:exported="false" />
         <activity
-            android:name=".views.DetailsActivity"
+            android:name=".views.DetailsFragment"
             android:exported="false" />
         <activity
-            android:name=".views.DashboardActivity"
+            android:name=".views.DashboardFragment"
             android:exported="true"
             android:launchMode="singleTop" />
         <activity

@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (status.equals("Sesión iniciada.")) {
                         //abrir activity dashboard
                         Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(context, DashboardActivity.class);
+                        Intent intent = new Intent(context, MainActivity.class);
                         startActivity(intent);
                     }else{
                         // Actualizamos el estado en la UI

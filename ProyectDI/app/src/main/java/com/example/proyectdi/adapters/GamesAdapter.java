@@ -1,6 +1,5 @@
 package com.example.proyectdi.adapters;
 
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -10,7 +9,7 @@ import com.bumptech.glide.Glide;
 import com.example.proyectdi.databinding.AdapterGamesBinding;
 import com.example.proyectdi.models.Games;
 import com.example.proyectdi.R;
-import com.example.proyectdi.views.DetailsActivity;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import java.util.List;
 
