@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  >
+
+    <data/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp">
+
+        <!-- Campos para cambio de contraseña -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_weight="2" />
+
+        <EditText
+            android:id="@+id/currentPasswordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/contrase_a_actual"
+            android:inputType="textPassword"
+            android:layout_gravity="center"
+            />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1" />
+        <EditText
+            android:id="@+id/newPasswordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nueva_contrase_a"
+            android:inputType="textPassword"
+            android:layout_gravity="center"
+           />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1" />
+        <Button
+            style="@style/ButtonStyle"
+            android:id="@+id/changePasswordButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cambiar_contrase_a"
+            android:layout_gravity="center"
+            android:layout_marginBottom="200dp"/>
+
+        <Switch
+            android:id="@+id/darkMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/modo_oscuro"
+            android:layout_gravity="end"
+            android:layout_marginBottom="8dp"/>
+
+
+
+    </LinearLayout>
+</layout>

@@ -39,6 +39,7 @@ public class FavouritesFragment extends Fragment {
                 Toast.makeText(getContext(), "Failed to load games.", Toast.LENGTH_SHORT).show();
             }
         });
+
         return view;
     }
 }
