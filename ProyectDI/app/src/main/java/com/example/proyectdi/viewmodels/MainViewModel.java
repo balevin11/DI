@@ -1,7 +1,6 @@
 package com.example.proyectdi.viewmodels;
 
 import androidx.lifecycle.ViewModel;
-import com.example.proyectdi.repositories.FavouritesRepository;
 import com.example.proyectdi.repositories.MainRepository;
 
 public class MainViewModel extends ViewModel {
