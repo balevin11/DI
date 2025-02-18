@@ -13,26 +13,41 @@
         android:theme="@style/Theme.ProyectDI"
         tools:targetApi="31">
         <activity
-            android:name=".views.FavouritesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".views.DetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".views.DashboardActivity"
+            android:name=".views.SplashActivity"
             android:exported="true"
+            android:theme="@style/Theme.SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".views.ProfileFragment"
+            android:exported="false" />
+
+        <activity
+            android:name=".views.MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.ProyectDI.NoActionBar" />
+        <activity
+            android:name=".views.FavouritesFragment"
+            android:exported="false" />
+        <activity
+            android:name=".views.DetailsFragment"
+            android:exported="false" />
+        <activity
+            android:name=".views.DashboardFragment"
+            android:exported="false"
             android:launchMode="singleTop" />
         <activity
             android:name=".views.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".views.LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
